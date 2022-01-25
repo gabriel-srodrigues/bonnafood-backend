@@ -17,6 +17,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -36,11 +41,13 @@ public class UserController implements UserControllerOpenApi {
 
 
     @Override
+    @GetMapping
     public ResponseEntity<Page<UserSummaryResponse>> search(Pageable page, UserFilter userFilter, Sort sort) {
         return null;
     }
 
     @Override
+    @PostMapping
     public ResponseEntity<Void> create(@Valid UserRequest userRequest) {
         BonnaUser user = disassembler.toDomainObject(userRequest);
         user = userCrudService.save(user);
@@ -54,18 +61,21 @@ public class UserController implements UserControllerOpenApi {
     }
 
     @Override
-    public ResponseEntity<UserDetailedResponse> findById(String id) {
+    @GetMapping("{id}")
+    public ResponseEntity<UserDetailedResponse> findById(@PathVariable String id) {
         UserDetailedResponse response = userDetailedAssembler.toModel(userCrudService.findByIdOrThrows(id));
         return ResponseEntity.ok(response);
     }
 
     @Override
-    public ResponseEntity<UserDetailedResponse> update(String id, @Valid UserRequest userRequest) {
+    @PutMapping("{id}")
+    public ResponseEntity<UserDetailedResponse> update(@PathVariable String id, @Valid  @RequestBody UserRequest userRequest) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> updatePassword(@Valid UpdatePasswordRequest updatePasswordRequest) {
+    @PostMapping("{id}/update-password")
+    public ResponseEntity<Void> updatePassword(@PathVariable String id, @Valid  @RequestBody UpdatePasswordRequest updatePasswordRequest) {
         return null;
     }
 }

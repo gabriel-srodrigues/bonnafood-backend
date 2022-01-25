@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @AllArgsConstructor
 public abstract class BonnafoodSecurity {
-
     public static final String SCOPE_ALL_WRITE = "SCOPE_all:write";
     public static final String SCOPE_ALL_READ = "SCOPE_all:read";
     public static final String ROLE_MANAGER = "MANAGER";

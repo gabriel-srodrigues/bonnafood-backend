@@ -32,3 +32,11 @@ bonnafood:
         secret: alganews-secret-2
         timeout: 30d
 
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    path: /swagger
+    operationsSorter: method
+  show-actuator: true
