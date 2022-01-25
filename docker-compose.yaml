@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: db_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "root"
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-compose-network
+
+  adminer:
+    image: adminer
+    container_name: db_adminer
+    ports:
+      - "18081:8080"
+    networks:
+      - mysql-compose-network
+    depends_on:
+      - mysql
+
+networks:
+  mysql-compose-network:
+    driver: bridge

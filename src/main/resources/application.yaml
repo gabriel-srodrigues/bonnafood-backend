@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    url: jdbc:mysql://${DB_URL:localhost:3306}/${BD_SCHEMA:bonnafood}?createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: ${BD_USER_NAME:root}
+    password: ${BD_USER_PASSWORD:root}
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/testdata
+  jpa:
+    mapping-resources: META-INF/orm.xml
+    show-sql: true
+
+bonnafood:
+  auth-url: http://localhost:8081
+  jwt:
+    keystore:
+      password: 121314
+      keypairAlias: bonnafood.jks
+      jksLocation: classpath:keystores/algafood.jks
+
+  security:
+    disabled: false
+    default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
+    signingKey: cEyxABUMcnCqhrR6rVkBxPayRkTJg2DqkB69
+    algorithm: HmacSHA256
+    resource-server:
+      tokens-signing-key: 7EoTQsw6$KycR&B9q4YAMPCss!!F6fE7FqNv!B2vEz
+    reset-token:
+      password-reset:
+        url: ${bonnafood.auth-url}/change-password/{token}
+        secret: alganews-secret-2
+        timeout: 30d
+
