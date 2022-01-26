@@ -20,7 +20,7 @@ public class JwtSecurity extends BonnafoodSecurity {
     public String getUserId() {
         var jwt = getJwtToken();
         if (jwt == null) return null;
-        return jwt.getClaim("bonnafood:user_id");
+        return jwt.getClaim("id");
     }
 
     private Jwt getJwtToken() {

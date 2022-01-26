@@ -31,16 +31,22 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("bonnafood-recipes")
-                .secret(passwordEncoder.encode("web123"))
-                .authorizedGrantTypes("password", "refresh_token", "client_credentials")
-                .scopes("WRITE", "READ")
-                .accessTokenValiditySeconds(6 * 60 * 60)// 6 horas
-                .refreshTokenValiditySeconds(60 * 24 * 60 * 60) // 60 dias
-
+                    .withClient("bonnafood-recipes")
+                    .secret(passwordEncoder.encode("web123"))
+                    .authorizedGrantTypes("password", "refresh_token", "client_credentials")
+                    .scopes("WRITE", "READ")
+                    .accessTokenValiditySeconds(6 * 60 * 60)// 6 horas
+                    .refreshTokenValiditySeconds(60 * 24 * 60 * 60) // 60 dias
                 .and()
-                .withClient("checktoken")
-                .secret(passwordEncoder.encode("check123"));
+                    .withClient("swagger")
+                    .secret(passwordEncoder.encode("swagger"))
+                    .authorizedGrantTypes("password", "refresh_token", "client_credentials")
+                    .scopes("WRITE", "READ")
+                    .accessTokenValiditySeconds(6 * 60 * 60)// 6 horas
+                    .refreshTokenValiditySeconds(60 * 24 * 60 * 60) // 60 dias
+                .and()
+                    .withClient("checktoken")
+                    .secret(passwordEncoder.encode("check123"));
     }
 
     @Override

@@ -12,25 +12,11 @@ spring:
     show-sql: true
 
 bonnafood:
-  auth-url: http://localhost:8081
-  jwt:
-    keystore:
-      password: 121314
-      keypairAlias: bonnafood.jks
-      jksLocation: classpath:keystores/algafood.jks
-
   security:
     disabled: false
     default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
     signingKey: cEyxABUMcnCqhrR6rVkBxPayRkTJg2DqkB69
     algorithm: HmacSHA256
-    resource-server:
-      tokens-signing-key: 7EoTQsw6$KycR&B9q4YAMPCss!!F6fE7FqNv!B2vEz
-    reset-token:
-      password-reset:
-        url: ${bonnafood.auth-url}/change-password/{token}
-        secret: alganews-secret-2
-        timeout: 30d
 
 springdoc:
   api-docs:

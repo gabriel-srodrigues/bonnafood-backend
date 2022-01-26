@@ -6,20 +6,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @AllArgsConstructor
 public abstract class BonnafoodSecurity {
-    public static final String SCOPE_ALL_WRITE = "SCOPE_all:write";
-    public static final String SCOPE_ALL_READ = "SCOPE_all:read";
-    public static final String ROLE_MANAGER = "MANAGER";
-    public static final String ROLE_EDITOR = "EDITOR";
-    public static final String ROLE_USER = "USER";
-
     private final UserRepository userRepository;
 
     public abstract String getUserId();
 
+    public boolean isAuthenticated() {
+        return getAuthentication().isAuthenticated();
+    }
 
     protected Authentication getAuthentication() {
         return SecurityContextHolder.getContext().getAuthentication();
@@ -34,5 +32,17 @@ public abstract class BonnafoodSecurity {
 
         return userRepository.findById(userId);
     }
+    public boolean hasAdminRole() {
+        return hasAuthority("ADMIN");
+    }
 
+    public boolean hasAuthority(String authorityName) {
+        return getAuthentication().getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(authorityName));
+    }
+
+    public boolean hasAnyAuthority(String... authorityName) {
+        return getAuthentication().getAuthorities().stream()
+                .anyMatch(authority -> Arrays.asList(authorityName).contains(authority.getAuthority()));
+    }
 }
