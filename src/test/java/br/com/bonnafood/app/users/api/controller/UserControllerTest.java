@@ -6,6 +6,7 @@ import br.com.bonnafood.app.template.user.builders.UserBuilder;
 import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ class UserControllerTest extends BaseControllerTest {
     private final UserTemplateLoader templateLoader = new UserTemplateLoader();
 
     @Test
+    @DisplayName("Deve falhar: phone - inválido")
     void given_invalidPhone_when_creatingUser_thenReturnsThrows() throws Exception {
         BonnaUser user = new UserBuilder().anyBonnaUser().withPassword("Test123@").withPhone("000000000").build();
         this.mockMvc
@@ -42,6 +44,7 @@ class UserControllerTest extends BaseControllerTest {
     }
 
     @Test
+    @DisplayName("Deve passar: todos os atributos são válidos")
     void given_validUser_when_creatingUser_thenReturnsSuccess() throws Exception {
         BonnaUser user = new UserBuilder().anyBonnaUser().withPassword("Test123@21d").withPhone("(99) 99999-9999").build();
         Mockito.when(userCrudService.save(any())).thenReturn(user);
