@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.users.api.model;
 
+import br.com.bonnafood.app.users.api.validation.Phone;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -11,10 +12,11 @@ public class UserRequest {
     @NotBlank
     @Schema(example = "Peter Parker", description = "Nome completo")
     private String name;
-    @NotBlank
     @Email
+    @NotBlank
     @Schema(example = "peter.parker@bonnafood.com.br", description = "E-mail do usuário")
     private String email;
+    @Phone
     @NotBlank
     @Schema(example = "(99) 99999-9999", description = "Telefone do usuário")
     private String phone;

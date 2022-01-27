@@ -53,6 +53,17 @@ create table `user`
     `active`     bit not null,
     `created_at` datetime(6),
     `updated_at` datetime(6),
+    `avatar` varchar(255),
+    `last_login` datetime null,
+    `location_country` varchar(255),
+    `location_state` varchar(255),
+    `location_city` varchar(255),
+    `bank_account_bank_code` varchar(255),
+    `bank_account_agency` varchar(255),
+    `bank_account_number` varchar(255),
+    `bank_account_digit` varchar(255),
+    `bank_account_type` varchar(255),
+    `birthdate` date not null,
     primary key (id)
 ) engine = InnoDB default charset = utf8;
 

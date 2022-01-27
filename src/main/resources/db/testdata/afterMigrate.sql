@@ -10,11 +10,11 @@ delete from `user_group`;
 
 set foreign_key_checks = 1;
 
-insert into `user` (`id`, `name`,`email`,`password`,`phone`,`role`,`created_at`, `active`) values
-('f572f96c-5b59-4695-98ce-29ff068b8942', 'Gabriel Rodrigues', 'gabriel.rodrigues@bonnafood.com.br', '$2a$12$Ch7QFrw537HM73FYrdsWw.lB2pKpWekyaVITtt/ytdFT2eIgr9Ow6', '(19) 98343-8754', 'MANAGER', '2019-11-03 02:01:21', true),
-('079f609f-dc8f-488d-a4b9-cd7d71070f32', 'Gabrily Souza da Paz', 'gabriely.souza@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(19) 99999-9999', 'USER', utc_timestamp, true),
-('a09a3885-088c-4025-b92b-1a3c70271c0d', 'Ted Mosby', 'ted.mosby@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(99) 99999-9999', 'EDITOR', utc_timestamp, true),
-('cee7196b-dcd8-4064-9b9b-f0e659ed739b', 'Lili Aldrim', 'lili.aldrim@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(99) 99999-9999', 'EDITOR', utc_timestamp, true);
+insert into `user` (`id`, `name`,`email`,`password`,`phone`,`role`,`created_at`, `active`, `location_country`, `location_state`,`location_city`,`bank_account_bank_code`,`bank_account_agency`,`bank_account_number`,`bank_account_digit`,`bank_account_type`,`birthdate`) values
+('f572f96c-5b59-4695-98ce-29ff068b8942', 'Gabriel Rodrigues', 'gabriel.rodrigues@bonnafood.com.br', '$2a$12$Ch7QFrw537HM73FYrdsWw.lB2pKpWekyaVITtt/ytdFT2eIgr9Ow6', '(19) 98343-8754', 'MANAGER', '2019-11-03 02:01:21', true, 'Brazil', 'SP', 'Sumaré', '4', '123', '27993', '42', 'SAVING', '1999-07-08'),
+('079f609f-dc8f-488d-a4b9-cd7d71070f32', 'Gabrily Souza da Paz', 'gabriely.souza@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(19) 99999-9999', 'USER', utc_timestamp, true, 'Brazil', 'SP', 'Sumaré', '4', '123', '27993', '42', 'SAVING', '1999-02-13'),
+('a09a3885-088c-4025-b92b-1a3c70271c0d', 'Ted Mosby', 'ted.mosby@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(99) 99999-9999', 'EDITOR', utc_timestamp, true, 'Brazil', 'SP', 'Campinas', '4', '123', '27993', '42', 'SAVING', '1993-10-28'),
+('cee7196b-dcd8-4064-9b9b-f0e659ed739b', 'Lili Aldrim', 'lili.aldrim@bonnafood.com.br', '$2a$12$QnuSg1.pRwK6VDnez5v1x.tGQOjgGP5D6zeF3G.Iny.lU/epqHCf6', '(99) 99999-9999', 'EDITOR', utc_timestamp, true, 'Brazil', 'SP', 'Sumaré', '4', '123', '27993', '42', 'SAVING', '1993-10-28');
 
 insert into `permission` (`id`, `name`, `description`) values
 ('2b46e479-58cc-48e5-a084-afd2c8770984', 'VIEW_USERS', 'Visualizar usuários'),

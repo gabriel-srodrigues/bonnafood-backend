@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +46,18 @@ public class BonnaUser {
 
     private String password;
 
+    private String avatar;
+
+    private OffsetDateTime lastLogin;
+
+    @Embedded
+    private Location location;
+
+    @Embedded
+    private BankAccount bankAccount;
+
+    private LocalDate birthdate;
+
     @Enumerated(EnumType.STRING)
     private EnumRoleType role;
 
@@ -66,5 +80,9 @@ public class BonnaUser {
 
     public boolean isNewUser(){
         return this.id == null;
+    }
+
+    public void updateLastLogin() {
+        this.setLastLogin(OffsetDateTime.now());
     }
 }

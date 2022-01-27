@@ -26,6 +26,9 @@ public class JpaUserDetailsService implements UserDetailsService {
         BonnaUser bonnaUser = userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com e-mail informado"));
 
+        bonnaUser.updateLastLogin();
+        userRepository.save(bonnaUser);
+
         return new AuthUser(bonnaUser, getAuthorities(bonnaUser));
     }
 

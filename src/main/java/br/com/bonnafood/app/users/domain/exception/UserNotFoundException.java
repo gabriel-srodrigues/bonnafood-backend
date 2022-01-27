@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.users.domain.exception;
 
-import br.com.bonnafood.app.common.api.exception.EntityNotFoundException;
+import br.com.bonnafood.app.common.domain.model.EntityNotFoundException;
 
 public class UserNotFoundException extends EntityNotFoundException {
 

@@ -34,7 +34,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("v1/users")
+@RequestMapping("users")
 public class UserController implements UserControllerOpenApi {
     private final UserCrudService userCrudService;
 

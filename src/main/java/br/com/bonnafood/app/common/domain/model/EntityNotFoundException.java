@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.common.api.exception;
+package br.com.bonnafood.app.common.domain.model;
 
 public class EntityNotFoundException extends BusinessException {
 
