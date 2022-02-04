@@ -7,6 +7,7 @@ delete from `recipe`;
 delete from `tag`;
 delete from `user`;
 delete from `user_group`;
+delete from `oauth_client_details`;
 
 set foreign_key_checks = 1;
 
@@ -50,3 +51,6 @@ insert into `user_group` (`user_id`, `group_id`) values
     ('079f609f-dc8f-488d-a4b9-cd7d71070f32', '4aeea182-1ef2-48f3-888e-cd7551a562af'),
     ('a09a3885-088c-4025-b92b-1a3c70271c0d', '536c8fe4-8ca7-4c99-b64a-bf467e0c468e'),
     ('cee7196b-dcd8-4064-9b9b-f0e659ed739b', '4aeea182-1ef2-48f3-888e-cd7551a562af');
+
+insert into oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, autoapprove)
+values ( 'bonnafood', null, '$2y$12$fHixriC7yXX/i1/CmpnGH.RFyK/l5YapLCFOEbIktONjE8ZDykSnu', 'READ,WRITE', 'password,client_credentials', null, null, null, null, null);
