@@ -53,4 +53,4 @@ insert into `user_group` (`user_id`, `group_id`) values
     ('cee7196b-dcd8-4064-9b9b-f0e659ed739b', '4aeea182-1ef2-48f3-888e-cd7551a562af');
 
 insert into oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types, web_server_redirect_uri, authorities, access_token_validity, refresh_token_validity, autoapprove)
-values ( 'bonnafood', null, '$2y$12$fHixriC7yXX/i1/CmpnGH.RFyK/l5YapLCFOEbIktONjE8ZDykSnu', 'READ,WRITE', 'password,client_credentials', null, null, null, null, null);
+values ( 'bonnafood', null, '$2a$12$NGo9Gt/jXmTpg1cIYXyojutGmfy8KJslD1KE1gwnU8ttFdFSesxXS', 'READ,WRITE', 'password', null, null, null, null, null);

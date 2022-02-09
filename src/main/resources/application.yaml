@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_URL:localhost:3306}/${BD_SCHEMA:bonnafood}?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://${DB_URL:localhost:3306}/${BD_SCHEMA:bonnasys}?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: ${BD_USER_NAME:root}
     password: ${BD_USER_PASSWORD:root}
   flyway:
@@ -11,13 +11,16 @@ spring:
   jpa:
     mapping-resources: META-INF/orm.xml
     show-sql: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          public-key-location: classpath:keystores/bonnasys_public_key.pem
 
 bonnafood:
   security:
     disabled: false
     default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
-    signingKey: cEyxABUMcnCqhrR6rVkBxPayRkTJg2DqkB69
-    algorithm: HmacSHA256
 
 springdoc:
   api-docs:
