@@ -3,7 +3,7 @@ package br.com.bonnafood.app.common.api.exceptionhandler;
 import br.com.bonnafood.app.common.domain.model.BusinessException;
 import br.com.bonnafood.app.common.domain.model.EntityNotFoundException;
 import br.com.bonnafood.app.common.api.model.Problem;
-import br.com.bonnafood.app.common.api.model.ProblemType;
+import br.com.bonnafood.app.common.domain.enums.ProblemType;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;

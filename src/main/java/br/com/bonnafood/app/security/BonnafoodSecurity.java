@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.security;
 
+import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;
 import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -23,7 +24,7 @@ public abstract class BonnafoodSecurity {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public Optional<BonnaUser> getAuthenticatedUser() {
+    public Optional<BonnaUser> getUserAuthenticated() {
         String userId = getUserId();
 
         if (userId == null) {
@@ -32,6 +33,11 @@ public abstract class BonnafoodSecurity {
 
         return userRepository.findById(userId);
     }
+
+    public BonnaUser getUserAuthentatedOrThrows() {
+        return this.getUserAuthenticated().orElseThrow(() -> new UserNotFoundException(getUserId()));
+    }
+
     public boolean hasAdminRole() {
         return hasAuthority("ADMIN");
     }
@@ -44,5 +50,9 @@ public abstract class BonnafoodSecurity {
     public boolean hasAnyAuthority(String... authorityName) {
         return getAuthentication().getAuthorities().stream()
                 .anyMatch(authority -> Arrays.asList(authorityName).contains(authority.getAuthority()));
+    }
+
+    public boolean canUpdateAnyPassword() {
+        return this.hasAdminRole();
     }
 }

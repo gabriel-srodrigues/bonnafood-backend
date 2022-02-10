@@ -13,6 +13,10 @@ public interface UserRepository extends CustomJpaRepository<BonnaUser, String>, 
     Optional<BonnaUser> findByEmail(String email);
 
     @Override
-    @Query("from user u join fetch u.groups g left join fetch g.permissions where u.id = :id")
+    @Query("from user u left join fetch u.groups g left join fetch g.permissions where u.id = :id")
     Optional<BonnaUser> findById(String id);
+
+    boolean existsByEmail(String email);
+
+    boolean existsByEmailAndDifferentUserId(String email, String userId);
 }

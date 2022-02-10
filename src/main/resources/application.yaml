@@ -5,8 +5,8 @@ spring:
     password: ${BD_USER_PASSWORD:root}
   flyway:
     locations:
-      - classpath:db/migration
-      - classpath:db/testdata
+      - classpath:META-INF/db/migration
+      - classpath:META-INF/db/testdata
     enabled: true
   jpa:
     mapping-resources: META-INF/orm.xml

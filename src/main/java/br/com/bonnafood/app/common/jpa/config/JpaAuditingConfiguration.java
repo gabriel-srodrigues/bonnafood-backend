@@ -26,6 +26,6 @@ public class JpaAuditingConfiguration {
 
     @Bean
     public AuditorAware<BonnaUser> auditorAware() {
-        return bonnafoodSecurity::getAuthenticatedUser;
+        return bonnafoodSecurity::getUserAuthenticated;
     }
 }

@@ -64,7 +64,6 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping("{id}")
-    @CheckSecurity.Admin
     public ResponseEntity<UserDetailedResponse> findById(@PathVariable String id) {
         UserDetailedResponse response = userDetailedAssembler.toModel(userCrudService.findByIdOrThrows(id));
         return ResponseEntity.ok(response);

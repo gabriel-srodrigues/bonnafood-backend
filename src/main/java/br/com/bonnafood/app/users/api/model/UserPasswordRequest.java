@@ -3,11 +3,13 @@ package br.com.bonnafood.app.users.api.model;
 import br.com.bonnafood.app.users.api.validation.Password;
 import br.com.bonnafood.app.users.api.validation.Phone;
 import br.com.bonnafood.app.users.domain.enums.EnumRoleType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Data
 public class UserPasswordRequest {
@@ -28,4 +30,8 @@ public class UserPasswordRequest {
     @NotNull
     @Schema(example = "USER", description = "Tipo de usuário")
     private EnumRoleType role;
+
+    @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate birthdate;
 }

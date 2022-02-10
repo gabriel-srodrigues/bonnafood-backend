@@ -19,12 +19,16 @@ public interface UserControllerOpenApi {
     @CheckSecurity.Admin
     @Operation(operationId = "search_users")
     ResponseEntity<Page<UserSummaryResponse>> search(UserFilter userFilter, Pageable page);
+
     @Operation(operationId = "create")
     ResponseEntity<Void> create(UserPasswordRequest userRequest);
+
     @Operation(operationId = "find_by_id")
     ResponseEntity<UserDetailedResponse> findById(String id);
+
     @Operation(operationId = "update")
     ResponseEntity<UserDetailedResponse> update(String id, UserRequest userRequest);
+    
     @Operation(operationId = "update_password")
     ResponseEntity<Void> updatePassword(String id, UpdatePasswordRequest updatePasswordRequest);
 }

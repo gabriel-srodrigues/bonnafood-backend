@@ -82,7 +82,11 @@ public class BonnaUser {
         return this.id == null;
     }
 
-    public void updateLastLogin() {
-        this.setLastLogin(OffsetDateTime.now());
+    public boolean isNew() {
+        return getId() == null;
+    }
+
+    public boolean isNotNew() {
+        return !isNew();
     }
 }
