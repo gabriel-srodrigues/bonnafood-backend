@@ -5,7 +5,11 @@ import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.xml.crypto.Data;
+import java.time.LocalDate;
+import java.time.Month;
 import java.time.OffsetDateTime;
+import java.util.Date;
 
 public class UserBuilder {
     private static final String DEFAULT_USER_ID = "9073da9c-1c8e-4308-a8cb-5197356f1eaa";

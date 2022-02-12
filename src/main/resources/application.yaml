@@ -18,6 +18,17 @@ spring:
           public-key-location: classpath:keystores/bonnasys_public_key.pem
 
 bonnafood:
+  storage:
+    type: S3
+    local:
+      user-avatar-directory: ${HOME}/estudos/avatares
+    S3:
+      bucket: bonnafood
+      region: sa-east-1
+      user-avatar-directory: users/avatar
+      profile: bonnafood
+
+
   security:
     disabled: false
     default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5

@@ -31,7 +31,5 @@ public class UserPasswordRequest {
     @Schema(example = "USER", description = "Tipo de usuário")
     private EnumRoleType role;
 
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdate;
 }

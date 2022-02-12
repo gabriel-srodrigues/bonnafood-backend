@@ -11,7 +11,7 @@ public enum EnumRoleType implements EnumListable<EnumRoleType> {
     EDITOR("option_enum_role_type_editor", 1, "editor"),
     MANAGER("option_enum_role_type_manager", 2, "editor");
 
-    private String i18nKey;
+    private final String i18nKey;
     private final int order;
     private final String name;
 

@@ -63,7 +63,7 @@ create table `user`
     `bank_account_number` varchar(255),
     `bank_account_digit` varchar(255),
     `bank_account_type` varchar(255),
-    `birthdate` date not null,
+    `birthdate` date,
     primary key (id)
 ) engine = InnoDB default charset = utf8;
 

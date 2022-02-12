@@ -2,7 +2,6 @@ package br.com.bonnafood.app.users.api.validation;
 
 import br.com.bonnafood.app.common.domain.i18n.I18nUtils;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl;
-import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -71,6 +71,14 @@
             <version>7.15.0</version>
         </dependency>
 
+        <!-- AWS Dependencies -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>1.12.158</version>
+        </dependency>
+
+
         <!-- Docs -->
         <dependency>
             <groupId>org.springdoc</groupId>
