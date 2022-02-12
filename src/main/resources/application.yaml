@@ -41,3 +41,11 @@ springdoc:
     path: /swagger
     operationsSorter: method
   show-actuator: true
+
+opendocument:
+  contact-email: contato@bonnafood.com.br
+  contact-name: Contato Bonnafood :)
+  module: Bonnafood
+  api-version: 1.0
+  description: "Uma descrição breve do documento"
+  contact-url: https://bonnafood.com.br

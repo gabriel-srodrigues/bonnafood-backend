@@ -7,13 +7,14 @@ import br.com.bonnafood.app.users.domain.model.BankAccount;
 import br.com.bonnafood.app.users.domain.model.Location;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
 @Getter
 @Setter
-public class UserDetailedResponse {
+public class UserDetailedResponse extends RepresentationModel<UserDetailedResponse> {
     private String id;
     private String name;
     private String email;

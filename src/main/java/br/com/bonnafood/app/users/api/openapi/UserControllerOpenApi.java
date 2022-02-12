@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 
 @Tag(name = "Usuários")
@@ -18,7 +20,7 @@ public interface UserControllerOpenApi {
 
     @CheckSecurity.Admin
     @Operation(operationId = "search_users")
-    ResponseEntity<Page<UserSummaryResponse>> search(UserFilter userFilter, Pageable page);
+    ResponseEntity<PagedModel<EntityModel<UserSummaryResponse>>> search(UserFilter userFilter, Pageable page);
 
     @Operation(operationId = "create")
     ResponseEntity<Void> create(UserPasswordRequest userRequest);

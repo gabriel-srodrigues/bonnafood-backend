@@ -13,12 +13,16 @@ import br.com.bonnafood.app.users.api.openapi.UserControllerOpenApi;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
-import br.com.bonnafood.app.users.domain.service.UserOnboardingService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.PagedModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +42,7 @@ import java.util.List;
 public class UserController implements UserControllerOpenApi {
     private final UserCrudService userCrudService;
 
+    private final PagedResourcesAssembler<UserSummaryResponse> pagedResourcesAssembler;
     private final UserSummaryAssembler userSummaryAssembler;
     private final UserDetailedAssembler userDetailedAssembler;
     private final UserDisassembler disassembler;
@@ -45,12 +50,17 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping
-    public ResponseEntity<Page<UserSummaryResponse>> search(UserFilter userFilter,
+    public ResponseEntity<PagedModel<EntityModel<UserSummaryResponse>>> search(UserFilter userFilter,
                                                             @PageableDefault Pageable page) {
         Page<BonnaUser> userPage = userCrudService.search(userFilter, page);
         List<UserSummaryResponse> userResponses = userSummaryAssembler.toCollectionModel(userPage.getContent());
+
         Page<UserSummaryResponse> pageResponse = new PageImpl<>(userResponses, page, userPage.getTotalElements());
-        return ResponseEntity.ok(pageResponse);
+        return ResponseEntity.ok(pagedResourcesAssembler.toModel(pageResponse));
+    }
+
+    private void configureListRelationForUsers(List<UserSummaryResponse> userSummaryResponseList) {
+        userSummaryResponseList.forEach(this::setLinkRelations);
     }
 
     @Override
@@ -88,5 +98,10 @@ public class UserController implements UserControllerOpenApi {
     public ResponseEntity<Void> updatePassword(@PathVariable String id, @Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {
         userCrudService.updatePassword(id, updatePasswordRequest.getOldPassword(), updatePasswordRequest.getNewPassword());
         return ResponseEntity.accepted().build();
+    }
+
+    private void setLinkRelations(UserSummaryResponse userSummary) {
+        userSummary.add(WebMvcLinkBuilder.linkTo(UserController.class).withRel(IanaLinkRelations.COLLECTION));
+        userSummary.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UserController.class).findById(userSummary.getId())).withSelfRel());
     }
 }
