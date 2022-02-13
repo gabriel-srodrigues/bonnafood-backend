@@ -1,6 +1,5 @@
 package br.com.bonnafood.app.users.api.controller;
 
-import br.com.bonnafood.app.BonnafoodApplication;
 import br.com.bonnafood.app.support.BaseControllerTest;
 import br.com.bonnafood.app.template.user.UserTemplateLoader;
 import br.com.bonnafood.app.template.user.builders.UserBuilder;
@@ -8,16 +7,12 @@ import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -25,11 +20,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
-@ExtendWith(SpringExtension.class)
-@TestPropertySource("classpath:application-test.properties")
-//@TestPropertySource(properties = {
-//        "spring.flyway.locations=classpath:META-INF/db/migration",
-//        "spring.datasource.url=jdbc:mysql://${DB_URL:localhost:3306}/bonnasys-test?createDatabaseIfNotExist=true&serverTimezone=UTC"})
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class UserControllerTest extends BaseControllerTest {
 
