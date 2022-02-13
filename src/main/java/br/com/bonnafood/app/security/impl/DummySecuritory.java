@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 @Component("bonnafoodSecurity")
-@ConditionalOnProperty(name = "alganews.security.disabled", havingValue = "true")
+@ConditionalOnProperty(name = "bonnafood.security.disabled", havingValue = "true")
 public class DummySecuritory extends BonnafoodSecurity {
 private final SecurityProperties securityProperties;
 

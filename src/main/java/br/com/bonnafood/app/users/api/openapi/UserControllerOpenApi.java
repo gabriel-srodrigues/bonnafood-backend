@@ -20,7 +20,7 @@ public interface UserControllerOpenApi {
 
     @CheckSecurity.Admin
     @Operation(operationId = "search_users")
-    ResponseEntity<PagedModel<EntityModel<UserSummaryResponse>>> search(UserFilter userFilter, Pageable page);
+    PagedModel<UserSummaryResponse> search(UserFilter userFilter, Pageable page);
 
     @Operation(operationId = "create")
     ResponseEntity<Void> create(UserPasswordRequest userRequest);

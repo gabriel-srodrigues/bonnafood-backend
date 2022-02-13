@@ -1,6 +1,5 @@
 package br.com.bonnafood.app.users.api.controller;
 
-import br.com.bonnafood.app.security.CheckSecurity;
 import br.com.bonnafood.app.users.api.assembler.UserDetailedAssembler;
 import br.com.bonnafood.app.users.api.assembler.UserDisassembler;
 import br.com.bonnafood.app.users.api.assembler.UserSummaryAssembler;
@@ -15,11 +14,9 @@ import br.com.bonnafood.app.users.domain.model.BonnaUser;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -34,7 +31,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -42,7 +38,7 @@ import java.util.List;
 public class UserController implements UserControllerOpenApi {
     private final UserCrudService userCrudService;
 
-    private final PagedResourcesAssembler<UserSummaryResponse> pagedResourcesAssembler;
+    private final PagedResourcesAssembler<BonnaUser> pagedResourcesAssembler;
     private final UserSummaryAssembler userSummaryAssembler;
     private final UserDetailedAssembler userDetailedAssembler;
     private final UserDisassembler disassembler;
@@ -50,17 +46,10 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping
-    public ResponseEntity<PagedModel<EntityModel<UserSummaryResponse>>> search(UserFilter userFilter,
+    public PagedModel<UserSummaryResponse> search(UserFilter userFilter,
                                                             @PageableDefault Pageable page) {
         Page<BonnaUser> userPage = userCrudService.search(userFilter, page);
-        List<UserSummaryResponse> userResponses = userSummaryAssembler.toCollectionModel(userPage.getContent());
-
-        Page<UserSummaryResponse> pageResponse = new PageImpl<>(userResponses, page, userPage.getTotalElements());
-        return ResponseEntity.ok(pagedResourcesAssembler.toModel(pageResponse));
-    }
-
-    private void configureListRelationForUsers(List<UserSummaryResponse> userSummaryResponseList) {
-        userSummaryResponseList.forEach(this::setLinkRelations);
+        return pagedResourcesAssembler.toModel(userPage, userSummaryAssembler);
     }
 
     @Override
@@ -100,8 +89,4 @@ public class UserController implements UserControllerOpenApi {
         return ResponseEntity.accepted().build();
     }
 
-    private void setLinkRelations(UserSummaryResponse userSummary) {
-        userSummary.add(WebMvcLinkBuilder.linkTo(UserController.class).withRel(IanaLinkRelations.COLLECTION));
-        userSummary.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(UserController.class).findById(userSummary.getId())).withSelfRel());
-    }
 }

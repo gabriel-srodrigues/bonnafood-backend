@@ -28,7 +28,6 @@ bonnafood:
       user-avatar-directory: users/avatar
       profile: bonnafood
 
-
   security:
     disabled: false
     default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
@@ -38,6 +37,9 @@ springdoc:
     enabled: true
     path: /api-docs
   swagger-ui:
+    oauth:
+      client-id: bonnafood
+      client-secret: web123
     path: /swagger
     operationsSorter: method
   show-actuator: true

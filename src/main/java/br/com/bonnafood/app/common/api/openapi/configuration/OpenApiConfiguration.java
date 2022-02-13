@@ -1,13 +1,12 @@
-package br.com.bonnafood.app.common.api.openapi;
+package br.com.bonnafood.app.common.api.openapi.configuration;
 
-import br.com.bonnafood.app.common.api.openapi.configuration.OpenApiProperties;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.security.OAuthFlow;
 import io.swagger.v3.oas.models.security.OAuthFlows;
+import io.swagger.v3.oas.models.security.Scopes;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
@@ -19,12 +18,12 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 @Configuration
-public class SecurityConfigurationOpenApi {
+public class OpenApiConfiguration {
     private static final String SECURITY_SCHEMA_NAME = "bonnasys-security";
     private final OpenApiProperties properties;
 
     @Autowired
-    public SecurityConfigurationOpenApi(OpenApiProperties properties) {
+    public OpenApiConfiguration(OpenApiProperties properties) {
         this.properties = properties;
     }
 
@@ -82,7 +81,20 @@ public class SecurityConfigurationOpenApi {
         return contact;
     }
 
-    SecurityScheme securityScheme() {
+    private SecurityScheme securityScheme() {
+        OAuthFlow oAuthFlow = new OAuthFlow()
+                .tokenUrl("http://localhost:8081/oauth/token")
+                .authorizationUrl("http://localhost:8081/oauth/token")
+                    .scopes(new Scopes().addString("READ", "WRITE"));
+
+        return new SecurityScheme()
+                .name(SECURITY_SCHEMA_NAME)
+                .flows(new OAuthFlows().password(oAuthFlow))
+                .type(SecurityScheme.Type.OAUTH2).scheme("oauth2");
+    }
+
+    @Deprecated //Deprecado pelas configurações de servidor externo
+    private SecurityScheme securitySchemeWithPasswordCredencials() {
         return new SecurityScheme()
                 .name(SECURITY_SCHEMA_NAME)
                 .type(SecurityScheme.Type.OAUTH2)
@@ -90,7 +102,9 @@ public class SecurityConfigurationOpenApi {
                 .bearerFormat("jwt")
                 .in(SecurityScheme.In.HEADER)
                 .name("Authorization")
-                .flows(new OAuthFlows().password(new OAuthFlow().tokenUrl("/oauth/token")));
+                .flows(new OAuthFlows()
+                        .password(new OAuthFlow()
+                                .tokenUrl("/oauth/token")));
     }
 
 }

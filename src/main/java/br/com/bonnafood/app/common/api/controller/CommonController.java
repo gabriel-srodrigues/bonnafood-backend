@@ -13,6 +13,7 @@ import java.util.Map;
 @RequestMapping
 public class CommonController {
 
+    //Implementação para entender o funcionamento pleno do ListAllEnumsByLocate ~
     @GetMapping("admin/configuration/list-all-enums")
     public ResponseEntity<Map<String, Map<String, String>>> getAllEnums(HttpServletRequest request) {
         Map<String, Map<String, String>> allEnums = ReflectionsUtils.listAllEnumsByLocale(request.getLocale());

@@ -24,10 +24,7 @@ public class ReflectionsUtils {
         Map<String, String> enumByLanguage = I18nUtils.getMapValues(javaEnum, locale);
         enumByLanguage = enumByLanguage.entrySet().stream().sorted(Map.Entry.comparingByValue())
                 .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (first, second) -> second,
-                        LinkedHashMap::new));
+                        Map.Entry::getKey, Map.Entry::getValue, (first, second) -> second, LinkedHashMap::new));
         return enumByLanguage;
     }
 
