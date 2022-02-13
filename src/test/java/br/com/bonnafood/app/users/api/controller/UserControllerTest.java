@@ -15,6 +15,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static br.com.bonnafood.app.template.user.UserTemplateLoader.UserTemplate.USER_WITH_INVALID_PHONE;
+import static br.com.bonnafood.app.template.user.UserTemplateLoader.UserTemplate.USER_WITH_VALID_PHONE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,7 +36,7 @@ class UserControllerTest extends BaseControllerTest {
     @Test
     @DisplayName("Deve falhar: phone - inválido")
     void given_invalidPhone_when_creatingUser_thenReturnsThrows() throws Exception {
-        BonnaUser user = new UserBuilder().anyBonnaUser().withPassword("Test123@").withPhone("000000000").build();
+        BonnaUser user = templateLoader.get(USER_WITH_INVALID_PHONE);
         this.mockMvc
                 .perform(post("/users")
                         .content(toJsonString(user))
@@ -45,7 +47,7 @@ class UserControllerTest extends BaseControllerTest {
     @Test
     @DisplayName("Deve passar: todos os atributos são válidos")
     void given_validUser_when_creatingUser_thenReturnsSuccess() throws Exception {
-        BonnaUser user = new UserBuilder().anyBonnaUser().withPassword("Test123@21d").withPhone("(99) 99999-9999").build();
+        BonnaUser user = templateLoader.get(USER_WITH_VALID_PHONE);
         Mockito.when(userCrudService.save(any())).thenReturn(user);
         this.mockMvc
                 .perform(post("/users")

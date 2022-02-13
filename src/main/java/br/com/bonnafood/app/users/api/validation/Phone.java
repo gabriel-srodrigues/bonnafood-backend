@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PhoneValidator.class)
 public @interface Phone {
-    String message() default "{Phone.message}";
+    String message() default "{PhoneValidator.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
