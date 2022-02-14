@@ -5,7 +5,7 @@ import br.com.bonnafood.app.security.BonnafoodSecurity;
 import br.com.bonnafood.app.users.domain.exception.UpdatePasswordNotAllowedException;
 import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import br.com.bonnafood.app.users.domain.repository.UserSpecification;
 import br.com.bonnafood.app.users.domain.service.UserActivationService;
@@ -29,34 +29,34 @@ public class UserServiceImpl implements UserCrudService, UserActivationService, 
     private final BonnafoodSecurity security;
 
     @Override
-    public BonnaUser findByIdOrThrows(String id) {
+    public User findByIdOrThrows(String id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Override
-    public BonnaUser save(BonnaUser user) {
+    public User save(User user) {
         return user.isNewUser() ? this.create(user) : this.update(user);
     }
 
     @Override
     public void updatePassword(String id, String oldPassword, String newPassword) {
-        BonnaUser user = findByIdOrThrows(id);
+        User user = findByIdOrThrows(id);
         if (!isRightPassword(user.getPassword(), oldPassword) || canUpdatePassword()) {
             throw new UpdatePasswordNotAllowedException("The password entered doesn't match with user's password.");
         }
-        Consumer<BonnaUser> userConsumer = bonnaUser -> bonnaUser.setPassword(encoder.encode(newPassword));
+        Consumer<User> userConsumer = bonnaUser -> bonnaUser.setPassword(encoder.encode(newPassword));
         userConsumer.accept(user);
 
         this.save(user);
     }
 
     @Override
-    public Page<BonnaUser> search(UserFilter userFilter, Pageable page) {
+    public Page<User> search(UserFilter userFilter, Pageable page) {
         return userRepository.findAll(UserSpecification.usingUserFilter(userFilter), page);
     }
 
     @Transactional
-    BonnaUser update(BonnaUser user) {
+    User update(User user) {
         userRepository.detach(user);
 
         validateUserEmailAvailability(user);
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserCrudService, UserActivationService, 
     }
 
     @Transactional
-    BonnaUser create(BonnaUser user) {
+    User create(User user) {
         userRepository.detach(user);
         validateUserEmailAvailability(user);
 
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserCrudService, UserActivationService, 
         return user;
     }
 
-    private boolean isEmailInUse(BonnaUser user) {
+    private boolean isEmailInUse(User user) {
         return userRepository.existsByEmailAndDifferentUserId(user.getEmail(), user.getId());
     }
 
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserCrudService, UserActivationService, 
         return userRepository.existsByEmail(email);
     }
 
-    private void validateUserEmailAvailability(BonnaUser user) {
+    private void validateUserEmailAvailability(User user) {
         if (user.isNotNew() && isEmailInUse(user) || user.isNew() && hasUserWithThisEmail(user.getEmail())) {
             throw new BusinessException("Already exists any user with e-mail %s".formatted(user.getEmail()));
         }

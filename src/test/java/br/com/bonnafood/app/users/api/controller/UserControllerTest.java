@@ -2,8 +2,7 @@ package br.com.bonnafood.app.users.api.controller;
 
 import br.com.bonnafood.app.support.BaseControllerTest;
 import br.com.bonnafood.app.template.user.UserTemplateLoader;
-import br.com.bonnafood.app.template.user.builders.UserBuilder;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,7 +35,7 @@ class UserControllerTest extends BaseControllerTest {
     @Test
     @DisplayName("Deve falhar: phone - inválido")
     void given_invalidPhone_when_creatingUser_thenReturnsThrows() throws Exception {
-        BonnaUser user = templateLoader.get(USER_WITH_INVALID_PHONE);
+        User user = templateLoader.get(USER_WITH_INVALID_PHONE);
         this.mockMvc
                 .perform(post("/users")
                         .content(toJsonString(user))
@@ -47,7 +46,7 @@ class UserControllerTest extends BaseControllerTest {
     @Test
     @DisplayName("Deve passar: todos os atributos são válidos")
     void given_validUser_when_creatingUser_thenReturnsSuccess() throws Exception {
-        BonnaUser user = templateLoader.get(USER_WITH_VALID_PHONE);
+        User user = templateLoader.get(USER_WITH_VALID_PHONE);
         Mockito.when(userCrudService.save(any())).thenReturn(user);
         this.mockMvc
                 .perform(post("/users")

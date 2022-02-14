@@ -10,16 +10,15 @@ import br.com.bonnafood.app.users.api.model.UserRequest;
 import br.com.bonnafood.app.users.api.model.UserSummaryResponse;
 import br.com.bonnafood.app.users.api.openapi.UserControllerOpenApi;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
-import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.PagedModel;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,9 +35,11 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RequestMapping("users")
 public class UserController implements UserControllerOpenApi {
+    private static final String SELECT_USER_SERVICE = "selectUserService";
+
     private final UserCrudService userCrudService;
 
-    private final PagedResourcesAssembler<BonnaUser> pagedResourcesAssembler;
+    private final PagedResourcesAssembler<User> pagedResourcesAssembler;
     private final UserSummaryAssembler userSummaryAssembler;
     private final UserDetailedAssembler userDetailedAssembler;
     private final UserDisassembler disassembler;
@@ -48,14 +49,14 @@ public class UserController implements UserControllerOpenApi {
     @GetMapping
     public PagedModel<UserSummaryResponse> search(UserFilter userFilter,
                                                             @PageableDefault Pageable page) {
-        Page<BonnaUser> userPage = userCrudService.search(userFilter, page);
+        Page<User> userPage = userCrudService.search(userFilter, page);
         return pagedResourcesAssembler.toModel(userPage, userSummaryAssembler);
     }
 
     @Override
     @PostMapping
     public ResponseEntity<Void> create(@Valid @RequestBody UserPasswordRequest userRequest) {
-        BonnaUser user = disassembler.toDomainObject(userRequest);
+        User user = disassembler.toDomainObject(userRequest);
         user.setPassword(userRequest.getPassword());
         user = userCrudService.save(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri()).build();
@@ -63,6 +64,7 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping("{id}")
+    @CircuitBreaker(name = SELECT_USER_SERVICE, fallbackMethod = "userServiceFallback")
     public ResponseEntity<UserDetailedResponse> findById(@PathVariable String id) {
         UserDetailedResponse response = userDetailedAssembler.toModel(userCrudService.findByIdOrThrows(id));
         return ResponseEntity.ok(response);
@@ -71,7 +73,7 @@ public class UserController implements UserControllerOpenApi {
     @Override
     @PutMapping("{id}")
     public ResponseEntity<UserDetailedResponse> update(@PathVariable String id, @Valid @RequestBody UserRequest userRequest) {
-        BonnaUser currentUser = userCrudService.findByIdOrThrows(id);
+        User currentUser = userCrudService.findByIdOrThrows(id);
 
         currentUser.setName(userRequest.getName());
         currentUser.setEmail(userRequest.getEmail());
@@ -89,4 +91,8 @@ public class UserController implements UserControllerOpenApi {
         return ResponseEntity.accepted().build();
     }
 
+    public ResponseEntity<?> userServiceFallback(Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.status(503).build();
+    }
 }

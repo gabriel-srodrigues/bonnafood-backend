@@ -11,6 +11,8 @@ spring:
   jpa:
     mapping-resources: META-INF/orm.xml
     show-sql: true
+    hibernate:
+      ddl-auto: update
   security:
     oauth2:
       resourceserver:
@@ -51,3 +53,30 @@ opendocument:
   api-version: 1.0
   description: "Uma descrição breve do documento"
   contact-url: https://bonnafood.com.br
+
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      selectUserService:
+        registerHealthIndicator: true
+        eventConsumerBufferSize: 10
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        failureRateThreshold: 50
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        slidingWindowSize: 10
+        waitDurationInOpenState: 5s
+        slidingWindowType: COUNT_BASED
+
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always

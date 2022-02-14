@@ -25,7 +25,7 @@ create table `recipe`
 (
     `id`            varchar(36) not null,
     `body`          varchar(255),
-    `cooking_time`  time,
+    `cooking_time`  bigint,
     `created_at`    datetime(6),
     `image`         varchar(80),
     `title`         varchar(80),
@@ -39,7 +39,8 @@ create table `recipe`
 create table `tag`
 (
     `tag_id` varchar(36) not null,
-    `name`   varchar(80)
+    `name`   varchar(80),
+    `recipe_id` varchar(36) not null
 ) engine = InnoDB default charset = utf8;
 
 create table `user`
@@ -88,7 +89,7 @@ alter table recipe
         foreign key (updated_by_id) references user (id);
 alter table tag
     add constraint tag_recipe_id
-        foreign key (tag_id) references recipe (id);
+        foreign key (recipe_id) references recipe (id);
 alter table user_group
     add constraint user_group_group_id
         foreign key (group_id) references groups (id);

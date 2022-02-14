@@ -1,7 +1,7 @@
 package br.com.bonnafood.app.security;
 
 import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -24,7 +24,7 @@ public abstract class BonnafoodSecurity {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public Optional<BonnaUser> getUserAuthenticated() {
+    public Optional<User> getUserAuthenticated() {
         String userId = getUserId();
 
         if (userId == null) {
@@ -34,7 +34,7 @@ public abstract class BonnafoodSecurity {
         return userRepository.findById(userId);
     }
 
-    public BonnaUser getUserAuthentatedOrThrows() {
+    public User getUserAuthentatedOrThrows() {
         return this.getUserAuthenticated().orElseThrow(() -> new UserNotFoundException(getUserId()));
     }
 

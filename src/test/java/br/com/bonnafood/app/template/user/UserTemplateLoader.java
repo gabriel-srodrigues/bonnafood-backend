@@ -3,13 +3,13 @@ package br.com.bonnafood.app.template.user;
 import br.com.bonnafood.app.template.Template;
 import br.com.bonnafood.app.template.TemplateLoader;
 import br.com.bonnafood.app.template.user.builders.UserBuilder;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserTemplateLoader implements TemplateLoader<BonnaUser> {
-    private final Map<UserTemplate, BonnaUser> templates;
+public class UserTemplateLoader implements TemplateLoader<User> {
+    private final Map<UserTemplate, User> templates;
 
     public enum UserTemplate implements Template {
         DEFAULT_USER, USER_WITH_INVALID_PHONE, USER_WITH_VALID_PHONE;
@@ -23,19 +23,19 @@ public class UserTemplateLoader implements TemplateLoader<BonnaUser> {
     }
 
     @Override
-    public BonnaUser get(Template template) {
+    public User get(Template template) {
         return templates.get(template);
     }
 
-    private static BonnaUser getDefaultUser() {
-        return new BonnaUser();
+    private static User getDefaultUser() {
+        return new User();
     }
 
-    private static BonnaUser getUserWithInvalidPhone() {
-        return new UserBuilder().anyBonnaUser().withPassword("Test123@").withPhone("000000000").build();
+    private static User getUserWithInvalidPhone() {
+        return new UserBuilder().anyUser().withPassword("Test123@").withPhone("000000000").build();
     }
 
-    private static BonnaUser getUserWithValidPhone() {
-        return  new UserBuilder().anyBonnaUser().withPassword("Test123@21d").withPhone("(99) 99999-9999").build();
+    private static User getUserWithValidPhone() {
+        return  new UserBuilder().anyUser().withPassword("Test123@21d").withPhone("(99) 99999-9999").build();
     }
 }

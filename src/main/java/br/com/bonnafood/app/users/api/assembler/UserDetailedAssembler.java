@@ -3,18 +3,13 @@ package br.com.bonnafood.app.users.api.assembler;
 import br.com.bonnafood.app.common.BonnafoodLinks;
 import br.com.bonnafood.app.users.api.controller.UserController;
 import br.com.bonnafood.app.users.api.model.UserDetailedResponse;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
-import lombok.AllArgsConstructor;
+import br.com.bonnafood.app.users.domain.model.User;
 import org.modelmapper.ModelMapper;
-import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
-import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class UserDetailedAssembler extends RepresentationModelAssemblerSupport<BonnaUser, UserDetailedResponse> {
+public class UserDetailedAssembler extends RepresentationModelAssemblerSupport<User, UserDetailedResponse> {
     private final ModelMapper modelMapper;
     private final BonnafoodLinks bonnafoodLinks;
 
@@ -24,7 +19,7 @@ public class UserDetailedAssembler extends RepresentationModelAssemblerSupport<B
         this.modelMapper = mapper;
     }
 
-    public UserDetailedResponse toModel(BonnaUser user) {
+    public UserDetailedResponse toModel(User user) {
         UserDetailedResponse userDetailedResponse = createModelWithId(user.getId(), user);
         modelMapper.map(user, userDetailedResponse);
 

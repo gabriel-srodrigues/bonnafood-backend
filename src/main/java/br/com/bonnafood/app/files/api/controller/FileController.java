@@ -2,7 +2,7 @@ package br.com.bonnafood.app.files.api.controller;
 
 import br.com.bonnafood.app.files.domain.model.NewPhoto;
 import br.com.bonnafood.app.files.domain.service.StorageService;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -25,7 +25,7 @@ public class FileController {
 
     @PutMapping(value = "/users/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Void> updateUserAvatar(@PathVariable String id, @RequestPart MultipartFile file) throws IOException {
-        BonnaUser user = userService.findByIdOrThrows(id);
+        User user = userService.findByIdOrThrows(id);
 
         String fileName = storageService.gerarNomeArquivo(file.getOriginalFilename());
 

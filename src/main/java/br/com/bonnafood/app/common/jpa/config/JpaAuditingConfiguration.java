@@ -1,7 +1,7 @@
 package br.com.bonnafood.app.common.jpa.config;
 
 import br.com.bonnafood.app.security.BonnafoodSecurity;
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +25,7 @@ public class JpaAuditingConfiguration {
     }
 
     @Bean
-    public AuditorAware<BonnaUser> auditorAware() {
+    public AuditorAware<User> auditorAware() {
         return bonnafoodSecurity::getUserAuthenticated;
     }
 }

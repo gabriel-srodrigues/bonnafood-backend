@@ -27,10 +27,10 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "user")
+@Entity
 @Where(clause = "active = true")
 @EntityListeners(AuditingEntityListener.class)
-public class BonnaUser {
+public class User {
 
     @Id
     @GeneratedValue(generator = "uuid2")

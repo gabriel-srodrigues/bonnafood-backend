@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.recipes.domain.model;
 
-import br.com.bonnafood.app.users.domain.model.BonnaUser;
+import br.com.bonnafood.app.users.domain.model.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import java.time.LocalTime;
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,18 +41,18 @@ public class Recipe {
 
     private String body;
 
-    private LocalTime cookingTime;
+    private Duration cookingTime;
 
     @CreatedBy
     @ManyToOne
-    private BonnaUser createdBy;
+    private User createdBy;
 
     @CreatedDate
     private OffsetDateTime createdAt;
 
     @LastModifiedBy
     @ManyToOne(fetch = FetchType.LAZY)
-    private BonnaUser updatedBy;
+    private User updatedBy;
 
     @LastModifiedDate
     private OffsetDateTime updatedAt;
