@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.common;
 
+import br.com.bonnafood.app.recipes.api.controller.RecipeController;
 import br.com.bonnafood.app.users.api.controller.UserController;
 import org.springframework.hateoas.IanaLinkRelations;
 import org.springframework.hateoas.Link;
@@ -26,6 +27,11 @@ public class BonnafoodLinks {
     public Link linkToUsers() {
         String usersUrl = WebMvcLinkBuilder.linkTo(UserController.class).toUri().toString();
         return Link.of(UriTemplate.of(usersUrl, PAGINATION_VARIABLES.concat(USER_FILTER_VARIABLES)), IanaLinkRelations.COLLECTION);
+    }
+
+    public Link linkToRecipes() {
+        String recipesUrl = WebMvcLinkBuilder.linkTo(RecipeController.class).toUri().toString();
+        return Link.of(recipesUrl, IanaLinkRelations.COLLECTION);
     }
 
 }

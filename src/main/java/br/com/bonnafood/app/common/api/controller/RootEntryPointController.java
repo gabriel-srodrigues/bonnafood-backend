@@ -19,6 +19,7 @@ public class RootEntryPointController {
      RootEntryPointModel root = new RootEntryPointModel();
 
      root.add(bonnafoodLinks.linkToUsers());
+     root.add(bonnafoodLinks.linkToRecipes());
 
      return root;
     }
