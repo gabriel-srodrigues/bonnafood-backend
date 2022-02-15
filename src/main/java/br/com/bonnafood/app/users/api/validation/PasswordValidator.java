@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.users.api.validation;
 
-import br.com.bonnasys.core.i18n.I18nUtils;
+import br.com.bonnasys.common.core.i18n.I18nUtils;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl;
 
 import javax.validation.ConstraintValidator;

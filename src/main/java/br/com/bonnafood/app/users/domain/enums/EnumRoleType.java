@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.users.domain.enums;
 
-import br.com.bonnasys.domain.enums.EnumListable;
+import br.com.bonnasys.common.domain.enums.EnumListable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

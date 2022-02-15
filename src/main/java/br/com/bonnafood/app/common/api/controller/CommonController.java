@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.common.api.controller;
 
-import br.com.bonnasys.core.i18n.ReflectionsUtils;
+import br.com.bonnasys.common.core.i18n.ReflectionsUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

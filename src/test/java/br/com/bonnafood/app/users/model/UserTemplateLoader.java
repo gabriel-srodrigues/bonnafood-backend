@@ -2,8 +2,8 @@ package br.com.bonnafood.app.users.model;
 
 import br.com.bonnafood.app.users.builders.UserBuilder;
 import br.com.bonnafood.app.users.domain.model.User;
-import br.com.bonnasys.core.template.Template;
-import br.com.bonnasys.core.template.TemplateLoader;
+import br.com.bonnasys.common.core.template.Template;
+import br.com.bonnasys.common.core.template.TemplateLoader;
 
 import java.util.HashMap;
 import java.util.Map;
