@@ -1,7 +1,7 @@
 package br.com.bonnafood.app.users.api.controller;
 
 import br.com.bonnafood.app.support.BaseControllerTest;
-import br.com.bonnafood.app.template.user.UserTemplateLoader;
+import br.com.bonnafood.app.users.model.UserTemplateLoader;
 import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserCrudService;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +14,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static br.com.bonnafood.app.template.user.UserTemplateLoader.UserTemplate.USER_WITH_INVALID_PHONE;
-import static br.com.bonnafood.app.template.user.UserTemplateLoader.UserTemplate.USER_WITH_VALID_PHONE;
+import static br.com.bonnafood.app.users.model.UserTemplateLoader.UserTemplate.USER_WITH_INVALID_PHONE;
+import static br.com.bonnafood.app.users.model.UserTemplateLoader.UserTemplate.USER_WITH_VALID_PHONE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

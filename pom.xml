@@ -81,7 +81,11 @@
             <scope>test</scope>
         </dependency>
 
-
+        <dependency>
+            <groupId>br.com.bonnasys</groupId>
+            <artifactId>bonnasys-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <!-- AWS Dependencies -->
         <dependency>
             <groupId>com.amazonaws</groupId>

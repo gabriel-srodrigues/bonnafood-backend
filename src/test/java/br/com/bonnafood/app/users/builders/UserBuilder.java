@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.template.user.builders;
+package br.com.bonnafood.app.users.builders;
 
 import br.com.bonnafood.app.users.domain.enums.EnumRoleType;
 import br.com.bonnafood.app.users.domain.model.User;

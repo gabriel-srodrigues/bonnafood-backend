@@ -1,5 +1,7 @@
 package br.com.bonnafood.app.common.domain.enums;
 
+
+import br.com.bonnasys.domain.enums.EnumListable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

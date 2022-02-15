@@ -14,7 +14,7 @@ public @interface CheckSecurity {
     @Target(METHOD)
     @interface Admin { }
 
-    @interface Folder {
+    @interface Users {
         @PreAuthorize("@bonnafoodSecurity.isAuthenticated()")
         @Retention(RUNTIME)
         @Target(METHOD)
