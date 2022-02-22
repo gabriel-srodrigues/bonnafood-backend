@@ -5,20 +5,20 @@ import br.com.bonnafood.app.files.domain.model.NewPhoto;
 import java.util.UUID;
 
 public interface StorageService {
-    void armazenar(NewPhoto novaFoto);
+    void storage(NewPhoto novaFoto);
 
-    void remover(String nomeArquivo);
+    void delete(String nomeArquivo);
 
-    default void substituir(String nomeArquivoAntigo, NewPhoto novaFoto) {
-        this.armazenar(novaFoto);
+    default void update(String oldFileName, NewPhoto newPhoto) {
+        this.storage(newPhoto);
 
-        if (nomeArquivoAntigo != null) {
-            this.remover(nomeArquivoAntigo);
+        if (oldFileName != null) {
+            this.delete(oldFileName);
         }
     }
 
-    default String gerarNomeArquivo(String nomeOriginal) {
-        return UUID.randomUUID() + "_" + nomeOriginal;
+    default String makeFileName(String name) {
+        return UUID.randomUUID() + "_" + name;
     }
 
 }

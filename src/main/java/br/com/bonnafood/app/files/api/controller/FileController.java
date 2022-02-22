@@ -27,14 +27,14 @@ public class FileController {
     public ResponseEntity<Void> updateUserAvatar(@PathVariable String id, @RequestPart MultipartFile file) throws IOException {
         User user = userService.findByIdOrThrows(id);
 
-        String fileName = storageService.gerarNomeArquivo(file.getOriginalFilename());
+        String fileName = storageService.makeFileName(file.getOriginalFilename());
 
         NewPhoto newPhoto = new NewPhoto();
         newPhoto.setFileName(fileName);
         newPhoto.setContentType(file.getContentType());
         newPhoto.setInputStream(file.getInputStream());
 
-        storageService.substituir(user.getAvatar(), newPhoto);
+        storageService.update(user.getAvatar(), newPhoto);
 
         user.setAvatar(fileName);
         userService.save(user);

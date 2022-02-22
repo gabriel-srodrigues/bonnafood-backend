@@ -58,7 +58,7 @@ public class UserController implements UserControllerOpenApi {
     public ResponseEntity<Void> create(@Valid @RequestBody UserPasswordRequest userRequest) {
         User user = disassembler.toDomainObject(userRequest);
         user.setPassword(userRequest.getPassword());
-        User createdUser = userCrudService.save(user);
+        user = userCrudService.save(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri()).build();
     }
 

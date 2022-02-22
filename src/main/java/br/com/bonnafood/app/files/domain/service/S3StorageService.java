@@ -21,7 +21,7 @@ public class S3StorageService implements StorageService {
     }
 
     @Override
-    public void armazenar(NewPhoto newPhoto) {
+    public void storage(NewPhoto newPhoto) {
         try {
             String filePath = getFilePath(newPhoto.getFileName());
 
@@ -42,7 +42,7 @@ public class S3StorageService implements StorageService {
     }
 
     @Override
-    public void remover(String nomeArquivo) {
+    public void delete(String nomeArquivo) {
         try {
             String caminhoArquivo = getFilePath(nomeArquivo);
 
