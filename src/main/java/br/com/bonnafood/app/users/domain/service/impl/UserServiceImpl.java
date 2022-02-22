@@ -8,10 +8,7 @@ import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import br.com.bonnafood.app.users.domain.repository.UserSpecification;
-import br.com.bonnafood.app.users.domain.service.UserActivationService;
-import br.com.bonnafood.app.users.domain.service.UserAvatarService;
-import br.com.bonnafood.app.users.domain.service.UserCrudService;
-import br.com.bonnafood.app.users.domain.service.UserOnboardingService;
+import br.com.bonnafood.app.users.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +20,7 @@ import java.util.function.Consumer;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserCrudService, UserActivationService, UserOnboardingService, UserAvatarService {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final BonnafoodSecurity security;

@@ -3,7 +3,7 @@ package br.com.bonnafood.app.files.api.controller;
 import br.com.bonnafood.app.files.domain.model.NewPhoto;
 import br.com.bonnafood.app.files.domain.service.StorageService;
 import br.com.bonnafood.app.users.domain.model.User;
-import br.com.bonnafood.app.users.domain.service.UserCrudService;
+import br.com.bonnafood.app.users.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @AllArgsConstructor
 @RequestMapping("upload")
 public class FileController {
-    private final UserCrudService userService;
+    private final UserService userService;
     private final StorageService storageService;
 
     @PutMapping(value = "/users/{id}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)

@@ -11,7 +11,7 @@ import br.com.bonnafood.app.users.api.model.UserSummaryResponse;
 import br.com.bonnafood.app.users.api.openapi.UserControllerOpenApi;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import br.com.bonnafood.app.users.domain.model.User;
-import br.com.bonnafood.app.users.domain.service.UserCrudService;
+import br.com.bonnafood.app.users.domain.service.UserService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,7 +37,7 @@ import javax.validation.Valid;
 public class UserController implements UserControllerOpenApi {
     private static final String SELECT_USER_SERVICE = "selectUserService";
 
-    private final UserCrudService userCrudService;
+    private final UserService userService;
 
     private final PagedResourcesAssembler<User> pagedResourcesAssembler;
     private final UserSummaryAssembler userSummaryAssembler;
@@ -49,7 +49,7 @@ public class UserController implements UserControllerOpenApi {
     @GetMapping
     public PagedModel<UserSummaryResponse> search(UserFilter userFilter,
                                                             @PageableDefault Pageable page) {
-        Page<User> userPage = userCrudService.search(userFilter, page);
+        Page<User> userPage = userService.search(userFilter, page);
         return pagedResourcesAssembler.toModel(userPage, userSummaryAssembler);
     }
 
@@ -58,7 +58,7 @@ public class UserController implements UserControllerOpenApi {
     public ResponseEntity<Void> create(@Valid @RequestBody UserPasswordRequest userRequest) {
         User user = disassembler.toDomainObject(userRequest);
         user.setPassword(userRequest.getPassword());
-        user = userCrudService.save(user);
+        user = userService.save(user);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri()).build();
     }
 
@@ -66,20 +66,20 @@ public class UserController implements UserControllerOpenApi {
     @GetMapping("{id}")
     @CircuitBreaker(name = SELECT_USER_SERVICE, fallbackMethod = "userServiceFallback")
     public ResponseEntity<UserDetailedResponse> findById(@PathVariable String id) {
-        UserDetailedResponse response = userDetailedAssembler.toModel(userCrudService.findByIdOrThrows(id));
+        UserDetailedResponse response = userDetailedAssembler.toModel(userService.findByIdOrThrows(id));
         return ResponseEntity.ok(response);
     }
 
     @Override
     @PutMapping("{id}")
     public ResponseEntity<UserDetailedResponse> update(@PathVariable String id, @Valid @RequestBody UserRequest userRequest) {
-        User currentUser = userCrudService.findByIdOrThrows(id);
+        User currentUser = userService.findByIdOrThrows(id);
 
         currentUser.setName(userRequest.getName());
         currentUser.setEmail(userRequest.getEmail());
         currentUser.setPhone(userRequest.getPhone());
 
-        currentUser = userCrudService.save(currentUser);
+        currentUser = userService.save(currentUser);
         UserDetailedResponse response = userDetailedAssembler.toModel(currentUser);
         return ResponseEntity.ok(response);
     }
@@ -87,7 +87,7 @@ public class UserController implements UserControllerOpenApi {
     @Override
     @PostMapping("{id}/update-password")
     public ResponseEntity<Void> updatePassword(@PathVariable String id, @Valid @RequestBody UpdatePasswordRequest updatePasswordRequest) {
-        userCrudService.updatePassword(id, updatePasswordRequest.getOldPassword(), updatePasswordRequest.getNewPassword());
+        userService.updatePassword(id, updatePasswordRequest.getOldPassword(), updatePasswordRequest.getNewPassword());
         return ResponseEntity.accepted().build();
     }
 

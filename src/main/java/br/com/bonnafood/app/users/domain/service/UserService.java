@@ -5,7 +5,7 @@ import br.com.bonnafood.app.users.domain.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface UserCrudService {
+public interface UserService {
     User findByIdOrThrows(String id);
 
     User save(User user);

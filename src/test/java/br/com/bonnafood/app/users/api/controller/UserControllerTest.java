@@ -3,7 +3,7 @@ package br.com.bonnafood.app.users.api.controller;
 import br.com.bonnafood.app.support.BaseControllerTest;
 import br.com.bonnafood.app.users.model.UserTemplateLoader;
 import br.com.bonnafood.app.users.domain.model.User;
-import br.com.bonnafood.app.users.domain.service.UserCrudService;
+import br.com.bonnafood.app.users.domain.service.UserService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -28,7 +28,7 @@ class UserControllerTest extends BaseControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private UserCrudService userCrudService;
+    private UserService userService;
 
     private final UserTemplateLoader templateLoader = new UserTemplateLoader();
 
@@ -47,7 +47,7 @@ class UserControllerTest extends BaseControllerTest {
     @DisplayName("Deve passar: todos os atributos são válidos")
     void given_validUser_when_creatingUser_thenReturnsSuccess() throws Exception {
         User user = templateLoader.get(USER_WITH_VALID_PHONE);
-        Mockito.when(userCrudService.save(any())).thenReturn(user);
+        Mockito.when(userService.save(any())).thenReturn(user);
         this.mockMvc
                 .perform(post("/users")
                         .content(toJsonString(user))
