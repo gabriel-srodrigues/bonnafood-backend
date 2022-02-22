@@ -1,6 +1,7 @@
 package br.com.bonnafood.app.common.api.controller;
 
 import br.com.bonnafood.app.common.BonnafoodLinks;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
+@Tag(name = "Root")
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 public class RootEntryPointController {
     private final BonnafoodLinks bonnafoodLinks;

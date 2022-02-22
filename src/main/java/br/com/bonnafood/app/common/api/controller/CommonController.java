@@ -1,6 +1,7 @@
 package br.com.bonnafood.app.common.api.controller;
 
 import br.com.bonnasys.common.core.i18n.ReflectionsUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping
+@Tag(name = "Common")
 public class CommonController {
 
     //Implementação para entender o funcionamento pleno do ListAllEnumsByLocate ~

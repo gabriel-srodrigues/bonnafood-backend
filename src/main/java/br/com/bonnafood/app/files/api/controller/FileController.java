@@ -4,6 +4,7 @@ import br.com.bonnafood.app.files.domain.model.NewPhoto;
 import br.com.bonnafood.app.files.domain.service.StorageService;
 import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 @RestController
 @AllArgsConstructor
+@Tag(name = "Files")
 @RequestMapping("upload")
 public class FileController {
     private final UserService userService;
