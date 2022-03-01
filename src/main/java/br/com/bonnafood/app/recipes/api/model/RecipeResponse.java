@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.recipes.api.model;
 
-import br.com.bonnafood.app.users.domain.model.User;
+import br.com.bonnafood.app.users.api.model.UserSummaryResponse;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,11 +16,10 @@ public class RecipeResponse extends RepresentationModel<RecipeResponse> {
     private String id;
     private String title;
     private String body;
-    @JsonFormat(pattern = "MINUTES")
     private Duration cookingTime;
-    private User createdBy;
+    private UserSummaryResponse createdBy;
     private OffsetDateTime createdAt;
-    private User updatedBy;
+    private UserSummaryResponse updatedBy;
     private OffsetDateTime updatedAt;
     private String image;
     private String video;

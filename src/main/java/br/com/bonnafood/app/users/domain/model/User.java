@@ -1,12 +1,15 @@
 package br.com.bonnafood.app.users.domain.model;
 
 import br.com.bonnafood.app.users.domain.enums.EnumRoleType;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -26,13 +29,13 @@ import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Where(clause = "active = true")
-@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
@@ -71,9 +74,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<Group> groups = new HashSet<>();
 
-    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User updatedBy;
 
     @CreatedDate
     private OffsetDateTime createdAt;
@@ -96,4 +101,13 @@ public class User {
     public boolean isNotNew() {
         return !isNew();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
 }

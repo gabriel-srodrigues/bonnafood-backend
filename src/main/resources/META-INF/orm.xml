@@ -15,7 +15,23 @@
             select case when count(1) > 0 then true else false end
             from Recipe r
             where r.id = :recipeId
-            and r.createdBy.id != :userId
+            and r.createdBy.id = :userId
+        </query>
+    </named-query>
+
+    <named-query name="Recipe.findByIdAndFetchTags">
+        <query>
+            from Recipe r
+            left join fetch r.tags
+            where r.id = :id
+        </query>
+    </named-query>
+
+    <named-query name="Recipe.saveRecipe">
+        <query>
+            from Recipe r
+            left join fetch r.tags
+            where r.id = :id
         </query>
     </named-query>
 

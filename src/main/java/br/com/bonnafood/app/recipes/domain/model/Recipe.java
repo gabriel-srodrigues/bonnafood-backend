@@ -1,61 +1,31 @@
 package br.com.bonnafood.app.recipes.domain.model;
 
+import br.com.bonnafood.app.common.jpa.Auditable;
 import br.com.bonnafood.app.users.domain.model.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.Duration;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@EntityListeners(AuditingEntityListener.class)
-public class Recipe {
-
-    @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(updatable = false, nullable = false)
-    private String id;
+public class Recipe extends Auditable<User> {
 
     private String title;
 
     private String body;
 
     private Duration cookingTime;
-
-    @CreatedBy
-    @ManyToOne
-    private User createdBy;
-
-    @CreatedDate
-    private OffsetDateTime createdAt;
-
-    @LastModifiedBy
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User updatedBy;
-
-    @LastModifiedDate
-    private OffsetDateTime updatedAt;
 
     private String image;
 
@@ -66,4 +36,7 @@ public class Recipe {
     @Column(name="name")
     private List<String> tags = new ArrayList<>();
 
+    public boolean isNew() {
+        return getId() == null;
+    }
 }

@@ -13,10 +13,9 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Configuration
-@EnableJpaAuditing(auditorAwareRef = "auditorAware", dateTimeProviderRef = "auditingDateTimeProvider")
 @AllArgsConstructor
+@EnableJpaAuditing(auditorAwareRef = "auditorAware", dateTimeProviderRef = "auditingDateTimeProvider")
 public class JpaAuditingConfiguration {
-
     private final BonnafoodSecurity bonnafoodSecurity;
 
     @Bean
@@ -28,4 +27,6 @@ public class JpaAuditingConfiguration {
     public AuditorAware<User> auditorAware() {
         return bonnafoodSecurity::getUserAuthenticated;
     }
+
+
 }

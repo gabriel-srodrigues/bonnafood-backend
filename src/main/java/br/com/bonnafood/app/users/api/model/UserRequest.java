@@ -3,11 +3,14 @@ package br.com.bonnafood.app.users.api.model;
 import br.com.bonnafood.app.users.api.validation.Phone;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Getter
+@Setter
 public class UserRequest {
     @NotBlank
     @Schema(example = "Peter Parker", description = "Nome completo")

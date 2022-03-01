@@ -10,9 +10,7 @@ import java.util.Map;
 public interface RecipeService {
     Page<Recipe> search(RecipeFilter filter, Pageable page);
 
-    Recipe create(Recipe recipe);
-
     Recipe findById(String id);
 
-    void updateRecipe(String recipeId, Map<String, Object> fields);
+    Recipe save(Recipe currentRecipe);
 }

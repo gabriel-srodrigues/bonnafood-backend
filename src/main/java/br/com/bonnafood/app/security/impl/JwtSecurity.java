@@ -1,6 +1,5 @@
 package br.com.bonnafood.app.security.impl;
 
-import br.com.bonnafood.app.recipes.domain.model.Recipe;
 import br.com.bonnafood.app.recipes.domain.repository.RecipeRepository;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
