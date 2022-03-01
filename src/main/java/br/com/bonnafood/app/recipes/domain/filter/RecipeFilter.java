@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RecipeFilter {
-    private String name;
+    private String tag;
     private String author;
     private String title;
 }

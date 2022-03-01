@@ -35,13 +35,11 @@ import javax.validation.Valid;
 @AllArgsConstructor
 @RequestMapping("users")
 public class UserController implements UserControllerOpenApi {
-    private static final String SELECT_USER_SERVICE = "selectUserService";
-
     private final UserService userService;
 
     private final PagedResourcesAssembler<User> pagedResourcesAssembler;
-    private final UserSummaryAssembler userSummaryAssembler;
     private final UserDetailedAssembler userDetailedAssembler;
+    private final UserSummaryAssembler userSummaryAssembler;
     private final UserDisassembler disassembler;
 
 
@@ -64,7 +62,6 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping("{id}")
-    @CircuitBreaker(name = SELECT_USER_SERVICE, fallbackMethod = "userServiceFallback")
     public ResponseEntity<UserDetailedResponse> findById(@PathVariable String id) {
         UserDetailedResponse response = userDetailedAssembler.toModel(userService.findByIdOrThrows(id));
         return ResponseEntity.ok(response);
@@ -91,8 +88,4 @@ public class UserController implements UserControllerOpenApi {
         return ResponseEntity.accepted().build();
     }
 
-    public ResponseEntity<?> userServiceFallback(Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.status(503).build();
-    }
 }

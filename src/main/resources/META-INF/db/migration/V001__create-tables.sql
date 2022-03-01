@@ -24,7 +24,7 @@ create table `group_permission`
 create table `recipe`
 (
     `id`            varchar(36) not null,
-    `body`          varchar(255),
+    `body`          text,
     `cooking_time`  bigint,
     `created_at`    datetime(6),
     `image`         varchar(80),
@@ -38,7 +38,6 @@ create table `recipe`
 
 create table `tag`
 (
-    `tag_id` varchar(36) not null,
     `name`   varchar(80),
     `recipe_id` varchar(36) not null
 ) engine = InnoDB default charset = utf8;
@@ -75,24 +74,10 @@ create table `user_group`
     primary key (user_id, group_id)
 ) engine = InnoDB default charset = utf8;
 
-alter table group_permission
-    add constraint group_permission_permission_id
-        foreign key (permission_id) references permission (id);
-alter table group_permission
-    add constraint group_permission_group_id
-        foreign key (group_id) references groups (id);
-alter table recipe
-    add constraint recipe_created_by_user_id
-        foreign key (created_by_id) references user (id);
-alter table recipe
-    add constraint recipe_updated_by_user_id
-        foreign key (updated_by_id) references user (id);
-alter table tag
-    add constraint tag_recipe_id
-        foreign key (recipe_id) references recipe (id);
-alter table user_group
-    add constraint user_group_group_id
-        foreign key (group_id) references groups (id);
-alter table user_group
-    add constraint user_group_user_id
-        foreign key (user_id) references user (id);
+alter table group_permission add constraint group_permission_permission_id foreign key (permission_id) references permission (id);
+alter table group_permission add constraint group_permission_group_id foreign key (group_id) references groups (id);
+alter table recipe add constraint recipe_created_by_user_i foreign key (created_by_id) references user (id);
+alter table recipe add constraint recipe_updated_by_user_id foreign key (updated_by_id) references user (id);
+alter table tag add constraint tag_recipe_id foreign key (recipe_id) references recipe (id);
+alter table user_group add constraint user_group_group_id foreign key (group_id) references groups (id);
+alter table user_group add constraint user_group_user_id foreign key (user_id) references user (id);

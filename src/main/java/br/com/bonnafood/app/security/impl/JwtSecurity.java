@@ -1,5 +1,7 @@
 package br.com.bonnafood.app.security.impl;
 
+import br.com.bonnafood.app.recipes.domain.model.Recipe;
+import br.com.bonnafood.app.recipes.domain.repository.RecipeRepository;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,15 +14,15 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(name = "bonnafood.security.disabled", havingValue = "false", matchIfMissing = true)
 public class JwtSecurity extends BonnafoodSecurity {
 
-    public JwtSecurity(UserRepository userRepository) {
-        super(userRepository);
+    public JwtSecurity(UserRepository userRepository, RecipeRepository recipeRepository) {
+        super(userRepository, recipeRepository);
     }
 
     @Override
     public String getUserId() {
         var jwt = getJwtToken();
         if (jwt == null) return null;
-        return jwt.getClaim("id");
+        return jwt.getClaim("user_id");
     }
 
     private Jwt getJwtToken() {

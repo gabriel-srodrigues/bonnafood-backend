@@ -17,12 +17,12 @@ public class UserSpecification {
         return ((root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.isNotBlank(filter.getName())) {
-                String searchTerm = "%" + filter.getName() + "%";
+            if (filter.getName() != null && !filter.getName().isBlank()) {
+                var searchTerm = "%" + filter.getName() + "%";
                 predicates.add(criteriaBuilder.like(root.get("name"), searchTerm));
             }
-            if (StringUtils.isNotBlank(filter.getEmail())) {
-                String searchTerm =  filter.getEmail() + "%";
+            if (filter.getEmail() != null && !filter.getEmail().isBlank()) {
+                var searchTerm =  filter.getEmail() + "%";
                 predicates.add(criteriaBuilder.like(root.get("email"), searchTerm));
             }
 

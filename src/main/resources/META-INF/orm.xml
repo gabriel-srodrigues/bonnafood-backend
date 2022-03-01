@@ -10,4 +10,13 @@
         </query>
     </named-query>
 
+    <named-query name="Recipe.isRecipeOwner">
+        <query>
+            select case when count(1) > 0 then true else false end
+            from Recipe r
+            where r.id = :recipeId
+            and r.createdBy.id != :userId
+        </query>
+    </named-query>
+
 </entity-mappings>

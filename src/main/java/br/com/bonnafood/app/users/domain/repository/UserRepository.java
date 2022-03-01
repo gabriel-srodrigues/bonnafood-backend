@@ -19,4 +19,5 @@ public interface UserRepository extends CustomJpaRepository<User, String>, JpaSp
     boolean existsByEmail(String email);
 
     boolean existsByEmailAndDifferentUserId(String email, String userId);
+
 }

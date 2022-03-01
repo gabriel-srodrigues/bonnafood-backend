@@ -1,5 +1,7 @@
 package br.com.bonnafood.app.security.impl;
 
+import br.com.bonnafood.app.recipes.domain.model.Recipe;
+import br.com.bonnafood.app.recipes.domain.repository.RecipeRepository;
 import br.com.bonnafood.app.security.BonnafoodSecurity;
 import br.com.bonnafood.app.security.config.SecurityProperties;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
@@ -11,8 +13,8 @@ import org.springframework.stereotype.Component;
 public class DummySecuritory extends BonnafoodSecurity {
 private final SecurityProperties securityProperties;
 
-    public DummySecuritory(UserRepository userRepository, SecurityProperties properties) {
-        super(userRepository);
+    public DummySecuritory(UserRepository userRepository, RecipeRepository recipeRepository, SecurityProperties properties) {
+        super(userRepository, recipeRepository);
         securityProperties = properties;
     }
 

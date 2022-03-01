@@ -15,11 +15,48 @@ public @interface CheckSecurity {
     @interface Admin { }
 
     @interface Users {
-        @PreAuthorize("@bonnafoodSecurity.isAuthenticated()")
+        @PreAuthorize("@bonnafoodSecurity.canViewAllUsers()")
         @Retention(RUNTIME)
         @Target(METHOD)
         @interface CanView {
         }
+
+        @PreAuthorize("@bonnafoodSecurity.canSeeSpecUser(#userId)")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanSeeHimself {
+        }
+
+        @PreAuthorize("@bonnafoodSecurity.canCreateUser()")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanCreate {
+        }
+
+
+        @PreAuthorize("@bonnafoodSecurity.canUpdateUser()")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanUpdate {
+        }
+        @PreAuthorize("@bonnafoodSecurity.canUpdatePassword(#id)")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanUpdatePassword {
+        }
     }
 
+    @interface Recipes {
+        @PreAuthorize("@bonnafoodSecurity.canCreateRecipe()")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanCreate {
+        }
+
+        @PreAuthorize("@bonnafoodSecurity.canEditRecipe(#recipeId)")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanEdit {
+        }
+    }
 }

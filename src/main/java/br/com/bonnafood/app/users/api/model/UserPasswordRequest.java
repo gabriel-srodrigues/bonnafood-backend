@@ -3,6 +3,7 @@ package br.com.bonnafood.app.users.api.model;
 import br.com.bonnafood.app.users.api.validation.Password;
 import br.com.bonnafood.app.users.api.validation.Phone;
 import br.com.bonnafood.app.users.domain.enums.EnumRoleType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -30,5 +31,6 @@ public class UserPasswordRequest {
     @Schema(example = "USER", description = "Tipo de usuário")
     private EnumRoleType role;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdate;
 }

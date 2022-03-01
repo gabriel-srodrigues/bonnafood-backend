@@ -18,19 +18,23 @@ import org.springframework.http.ResponseEntity;
 @Tag(name = "Usuários")
 public interface UserControllerOpenApi {
 
-    @CheckSecurity.Admin
+    @CheckSecurity.Users.CanView
     @Operation(operationId = "search_users")
     PagedModel<UserSummaryResponse> search(UserFilter userFilter, Pageable page);
 
     @Operation(operationId = "create")
+    @CheckSecurity.Users.CanCreate
     ResponseEntity<Void> create(UserPasswordRequest userRequest);
 
     @Operation(operationId = "find_by_id")
-    ResponseEntity<UserDetailedResponse> findById(String id);
+    @CheckSecurity.Users.CanSeeHimself
+    ResponseEntity<UserDetailedResponse> findById(String userId);
 
     @Operation(operationId = "update")
+    @CheckSecurity.Users.CanUpdate
     ResponseEntity<UserDetailedResponse> update(String id, UserRequest userRequest);
     
     @Operation(operationId = "update_password")
+    @CheckSecurity.Users.CanUpdatePassword
     ResponseEntity<Void> updatePassword(String id, UpdatePasswordRequest updatePasswordRequest);
 }
