@@ -33,6 +33,7 @@ create table `recipe`
     `video`         varchar(80),
     `created_by_id` varchar(255),
     `updated_by_id` varchar(255),
+    `deleted` bit,
     primary key (id)
 ) engine = InnoDB default charset = utf8;
 

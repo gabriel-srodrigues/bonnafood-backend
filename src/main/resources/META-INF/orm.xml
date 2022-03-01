@@ -27,12 +27,4 @@
         </query>
     </named-query>
 
-    <named-query name="Recipe.saveRecipe">
-        <query>
-            from Recipe r
-            left join fetch r.tags
-            where r.id = :id
-        </query>
-    </named-query>
-
 </entity-mappings>

@@ -67,8 +67,17 @@ public abstract class BonnafoodSecurity {
     }
 
     public boolean canEditRecipe(String recipeId) {
-        return isRecipeOwner(recipeId) || hasAdminRole() || hasEditRecipeRole() ;
+        return hasAdminRole() || hasEditRecipeRole() || isRecipeOwner(recipeId);
     }
+
+    public boolean canDeleteRecipe(String recipeId) {
+        return hasAdminRole() || hasDeleteRecipeRole() || isRecipeOwner(recipeId);
+    }
+
+    private boolean hasDeleteRecipeRole() {
+        return hasAuthority(DELETE_RECIPES);
+    }
+
     public boolean canViewAllUsers() {
         return hasAdminRole() || hasViewUserRole();
     }

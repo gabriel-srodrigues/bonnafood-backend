@@ -19,6 +19,7 @@ import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ReflectionUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -73,6 +74,13 @@ public class RecipeController implements RecipeControllerOpenApi {
         merge(fields, currentRecipe);
         service.save(currentRecipe);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable String id) {
+        service.deleteRecipe(id);
+        return ResponseEntity.accepted().build();
     }
 
 

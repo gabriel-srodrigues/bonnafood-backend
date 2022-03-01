@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.recipes.domain.service.impl;
 
+import br.com.bonnafood.app.common.domain.model.BusinessException;
 import br.com.bonnafood.app.recipes.domain.exception.RecipeNotFoundException;
 import br.com.bonnafood.app.recipes.domain.filter.RecipeFilter;
 import br.com.bonnafood.app.recipes.domain.model.Recipe;
@@ -32,6 +33,18 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     public Recipe save(Recipe currentRecipe) {
         return currentRecipe.isNew() ?  this.create(currentRecipe) : this.update(currentRecipe);
+    }
+
+    @Override
+    public void deleteRecipe(String recipeId) {
+       Recipe currentRecipe = this.findById(recipeId);
+
+       if (currentRecipe.isDeleted()) {
+           throw new BusinessException("Recipe with id '%s' has been deleted.".formatted(recipeId));
+       }
+
+       currentRecipe.setDeleted(true);
+       this.save(currentRecipe);
     }
 
     @Transactional

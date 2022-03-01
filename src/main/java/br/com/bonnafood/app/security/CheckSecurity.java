@@ -58,5 +58,11 @@ public @interface CheckSecurity {
         @Target(METHOD)
         @interface CanEdit {
         }
+
+        @PreAuthorize("@bonnafoodSecurity.canDeleteRecipe(#recipeId)")
+        @Retention(RUNTIME)
+        @Target(METHOD)
+        @interface CanDelete {
+        }
     }
 }

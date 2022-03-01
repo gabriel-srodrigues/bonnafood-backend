@@ -28,4 +28,7 @@ public interface RecipeControllerOpenApi {
 
     @CheckSecurity.Recipes.CanEdit
     ResponseEntity<Void> update(String recipeId, Map<String, Object> fields);
+
+    @CheckSecurity.Recipes.CanDelete
+    ResponseEntity<Void> delete(String recipeId);
 }
