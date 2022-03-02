@@ -18,6 +18,8 @@ spring:
       resourceserver:
         jwt:
           public-key-location: classpath:keystores/bonnasys_public_key.pem
+  application:
+    name: bonnafood
 
 bonnafood:
   storage:
@@ -81,3 +83,11 @@ management:
     health:
       show-details: always
 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8090}/eureka
+    fetch-registry: true
+    register-with-eureka: true
