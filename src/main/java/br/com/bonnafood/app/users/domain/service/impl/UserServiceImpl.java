@@ -1,7 +1,7 @@
 package br.com.bonnafood.app.users.domain.service.impl;
 
 import br.com.bonnafood.app.common.domain.model.BusinessException;
-import br.com.bonnafood.app.security.BonnafoodSecurity;
+import br.com.bonnafood.app.common.security.BonnafoodSecurity;
 import br.com.bonnafood.app.users.domain.exception.UpdatePasswordNotAllowedException;
 import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;

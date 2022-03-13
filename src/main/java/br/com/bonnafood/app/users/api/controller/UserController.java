@@ -12,7 +12,6 @@ import br.com.bonnafood.app.users.api.openapi.UserControllerOpenApi;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.service.UserService;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

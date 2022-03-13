@@ -1,6 +1,6 @@
 package br.com.bonnafood.app;
 
-import br.com.bonnafood.app.common.jpa.CustomJpaRepositoryImpl;
+import  br.com.bonnafood.app.common.jpa.CustomJpaRepositoryImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;

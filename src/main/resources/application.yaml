@@ -22,16 +22,6 @@ spring:
     name: bonnafood
 
 bonnafood:
-  storage:
-    type: S3
-    local:
-      user-avatar-directory: ${HOME}/estudos/avatares
-    S3:
-      bucket: bonnafood
-      region: sa-east-1
-      user-avatar-directory: users/avatar
-      profile: bonnafood
-
   security:
     disabled: false
     default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
@@ -55,39 +45,3 @@ opendocument:
   api-version: 1.0
   description: "Uma descrição breve do documento"
   contact-url: https://bonnafood.com.br
-
-
-resilience4j:
-  circuitbreaker:
-    instances:
-      selectUserService:
-        registerHealthIndicator: true
-        eventConsumerBufferSize: 10
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        failureRateThreshold: 50
-        minimumNumberOfCalls: 5
-        permittedNumberOfCallsInHalfOpenState: 3
-        slidingWindowSize: 10
-        waitDurationInOpenState: 5s
-        slidingWindowType: COUNT_BASED
-
-management:
-  health:
-    circuitbreakers:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always
-
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    service-url:
-      defaultZone: ${EUREKA_URL:http://localhost:8090}/eureka
-    fetch-registry: true
-    register-with-eureka: true

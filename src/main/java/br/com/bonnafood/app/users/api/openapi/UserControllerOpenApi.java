@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.users.api.openapi;
 
-import br.com.bonnafood.app.security.CheckSecurity;
+import br.com.bonnafood.app.common.security.CheckSecurity;
 import br.com.bonnafood.app.users.api.model.UpdatePasswordRequest;
 import br.com.bonnafood.app.users.api.model.UserDetailedResponse;
 import br.com.bonnafood.app.users.api.model.UserPasswordRequest;
@@ -9,9 +9,7 @@ import br.com.bonnafood.app.users.api.model.UserSummaryResponse;
 import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
 

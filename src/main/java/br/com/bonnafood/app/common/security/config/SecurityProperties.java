@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.security.config;
+package br.com.bonnafood.app.common.security.config;
 
 import lombok.Getter;
 import lombok.Setter;

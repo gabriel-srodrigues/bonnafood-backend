@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.security;
+package br.com.bonnafood.app.common.security;
 
 import br.com.bonnafood.app.recipes.domain.repository.RecipeRepository;
 import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;

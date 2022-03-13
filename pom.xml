@@ -74,12 +74,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-eureka-client -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>3.1.1</version>
-        </dependency>
 
         <!-- Database dependencies -->
         <dependency>
@@ -158,13 +152,6 @@
             <groupId>br.com.bonnasys</groupId>
             <artifactId>bonnasys-common</artifactId>
             <version>1.0.4</version>
-        </dependency>
-
-        <!-- Circuit Breaker-->
-        <dependency>
-            <groupId>io.github.resilience4j</groupId>
-            <artifactId>resilience4j-spring-boot2</artifactId>
-            <version>1.7.1</version>
         </dependency>
 
     </dependencies>

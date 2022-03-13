@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.security.config;
+package br.com.bonnafood.app.common.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

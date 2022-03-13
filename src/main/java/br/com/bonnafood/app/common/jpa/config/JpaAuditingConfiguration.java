@@ -1,6 +1,6 @@
 package br.com.bonnafood.app.common.jpa.config;
 
-import br.com.bonnafood.app.security.BonnafoodSecurity;
+import br.com.bonnafood.app.common.security.BonnafoodSecurity;
 import br.com.bonnafood.app.users.domain.model.User;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

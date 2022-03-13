@@ -1,11 +1,11 @@
-package br.com.bonnafood.app.security.impl;
+package br.com.bonnafood.app.common.security.impl;
 
 import br.com.bonnafood.app.recipes.domain.repository.RecipeRepository;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.jwt.Jwt;
-import br.com.bonnafood.app.security.BonnafoodSecurity;
+import br.com.bonnafood.app.common.security.BonnafoodSecurity;
 import org.springframework.stereotype.Component;
 
 @Component("bonnafoodSecurity")

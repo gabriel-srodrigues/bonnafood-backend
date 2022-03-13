@@ -1,4 +1,4 @@
-package br.com.bonnafood.app.security;
+package br.com.bonnafood.app.common.security;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,6 +9,11 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 public @interface CheckSecurity {
+
+    @Retention(RUNTIME)
+    @Target(METHOD)
+    @interface Public { }
+
     @PreAuthorize("@bonnafoodSecurity.hasAdminRole()")
     @Retention(RUNTIME)
     @Target(METHOD)
