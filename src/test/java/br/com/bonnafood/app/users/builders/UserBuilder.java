@@ -22,6 +22,7 @@ public class UserBuilder {
         userBuilder.user.setRole(EnumRoleType.USER);
         userBuilder.user.setName("Some some");
         userBuilder.user.setActive(true);
+        userBuilder.user.setAge(24);
     }
 
     public UserBuilder withId() {
@@ -48,4 +49,13 @@ public class UserBuilder {
         return user;
     }
 
+    public UserBuilder withUserName(String name) {
+        user.setName(name);
+        return this;
+    }
+
+    public UserBuilder withAge(int age) {
+        user.setAge(age);
+        return this;
+    }
 }

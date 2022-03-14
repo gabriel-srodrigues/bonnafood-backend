@@ -56,6 +56,8 @@ public class User {
 
     private OffsetDateTime lastLogin;
 
+    private int age;
+
     @Embedded
     private Location location;
 

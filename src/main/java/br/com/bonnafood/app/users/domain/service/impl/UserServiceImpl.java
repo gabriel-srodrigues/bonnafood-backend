@@ -1,6 +1,7 @@
 package br.com.bonnafood.app.users.domain.service.impl;
 
 import br.com.bonnafood.app.common.domain.model.BusinessException;
+import br.com.bonnafood.app.common.rules.Rule;
 import br.com.bonnafood.app.common.security.BonnafoodSecurity;
 import br.com.bonnafood.app.users.domain.exception.UpdatePasswordNotAllowedException;
 import br.com.bonnafood.app.users.domain.exception.UserNotFoundException;
@@ -8,6 +9,7 @@ import br.com.bonnafood.app.users.domain.filter.UserFilter;
 import br.com.bonnafood.app.users.domain.model.User;
 import br.com.bonnafood.app.users.domain.repository.UserRepository;
 import br.com.bonnafood.app.users.domain.repository.UserSpecification;
+import br.com.bonnafood.app.users.domain.rules.UserNameRule;
 import br.com.bonnafood.app.users.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
