@@ -22,7 +22,7 @@ import java.time.OffsetDateTime;
 @Getter
 @Setter
 @MappedSuperclass
-@EntityListeners(CustomAuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public abstract class Auditable<U> {
 
     @Id

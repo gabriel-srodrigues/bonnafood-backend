@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.recipes.api.controller;
 
+import br.com.bonnafood.app.common.util.ServletUtil;
 import br.com.bonnafood.app.recipes.api.assembler.RecipeAssembler;
 import br.com.bonnafood.app.recipes.api.assembler.RecipeDisassembler;
 import br.com.bonnafood.app.recipes.api.assembler.RecipeSummaryAssembler;
@@ -56,7 +57,7 @@ public class RecipeController implements RecipeControllerOpenApi {
     public ResponseEntity<Void> create(@Valid @RequestBody RecipeRequest request) {
         Recipe recipe = disassembler.toDomainObject(request);
         recipe = service.save(recipe);
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(recipe.getId()).toUri()).build();
+        return ResponseEntity.created(ServletUtil.getUriByRequest(recipe.getId())).build();
     }
 
     @Override
