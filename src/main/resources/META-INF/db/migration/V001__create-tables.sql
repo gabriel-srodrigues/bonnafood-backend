@@ -54,6 +54,7 @@ create table `user`
     `active`     bit not null,
     `created_at` datetime(6),
     `updated_at` datetime(6),
+    `age`           int,
     `avatar` varchar(255),
     `last_login` datetime null,
     `location_country` varchar(255),
@@ -65,6 +66,8 @@ create table `user`
     `bank_account_digit` varchar(255),
     `bank_account_type` varchar(255),
     `birthdate` date,
+    `created_by_id` varchar(255),
+    `updated_by_id` varchar(255),
     primary key (id)
 ) engine = InnoDB default charset = utf8;
 

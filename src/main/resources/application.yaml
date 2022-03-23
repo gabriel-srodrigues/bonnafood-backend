@@ -12,7 +12,15 @@ spring:
     mapping-resources: META-INF/orm.xml
     show-sql: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
+    properties:
+      javax:
+        persistence:
+          schema-generation:
+            scripts:
+              action: create
+              create-target: create.sql
+              create-source: metadata
   security:
     oauth2:
       resourceserver:

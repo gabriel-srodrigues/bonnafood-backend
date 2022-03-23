@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.users.domain.model;
 
+import br.com.bonnafood.app.common.jpa.Auditable;
 import br.com.bonnafood.app.users.domain.enums.EnumRoleType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -76,11 +77,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<Group> groups = new HashSet<>();
 
+    @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)
     private User createdBy;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User updatedBy;
 
     @CreatedDate
     private OffsetDateTime createdAt;

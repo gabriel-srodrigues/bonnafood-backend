@@ -1,5 +1,6 @@
 package br.com.bonnafood.app.users.api.controller;
 
+import br.com.bonnafood.app.common.util.ServletUtil;
 import br.com.bonnafood.app.users.api.assembler.UserDetailedAssembler;
 import br.com.bonnafood.app.users.api.assembler.UserDisassembler;
 import br.com.bonnafood.app.users.api.assembler.UserSummaryAssembler;
@@ -19,6 +20,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedModel;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,8 +46,7 @@ public class UserController implements UserControllerOpenApi {
 
     @Override
     @GetMapping
-    public PagedModel<UserSummaryResponse> search(UserFilter userFilter,
-                                                            @PageableDefault Pageable page) {
+    public PagedModel<UserSummaryResponse> search(UserFilter userFilter, @PageableDefault Pageable page) {
         Page<User> userPage = userService.search(userFilter, page);
         return pagedResourcesAssembler.toModel(userPage, userSummaryAssembler);
     }
@@ -56,7 +57,7 @@ public class UserController implements UserControllerOpenApi {
         User user = disassembler.toDomainObject(userRequest);
         user.setPassword(userRequest.getPassword());
         user = userService.save(user);
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri()).build();
+        return ResponseEntity.created(ServletUtil.getUriByRequest(user.getId())).build();
     }
 
     @Override
