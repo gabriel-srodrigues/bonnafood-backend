@@ -47,7 +47,7 @@ springdoc:
   show-actuator: true
 
 opendocument:
-  contact-email: contato@bonnafood.com.br
+  contact-email: contato@bonnasys.com.br
   contact-name: Contato Bonnafood :)
   module: Bonnafood
   api-version: 1.0
