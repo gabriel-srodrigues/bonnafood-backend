@@ -85,3 +85,4 @@ alter table recipe add constraint recipe_updated_by_user_id foreign key (updated
 alter table tag add constraint tag_recipe_id foreign key (recipe_id) references recipe (id);
 alter table user_group add constraint user_group_group_id foreign key (group_id) references groups (id);
 alter table user_group add constraint user_group_user_id foreign key (user_id) references user (id);
+alter table user add constraint user_user_created_by_id foreign key (created_by_id) references user (id);

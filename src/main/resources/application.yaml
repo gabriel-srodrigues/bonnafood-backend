@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${DB_URL:localhost:3306}/${BD_SCHEMA:bonnasys}?createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://${DB_URL:localhost:3307}/${BD_SCHEMA:bonnasys}?createDatabaseIfNotExist=true&serverTimezone=UTC
     username: ${BD_USER_NAME:root}
     password: ${BD_USER_PASSWORD:root}
   flyway:
@@ -12,15 +12,15 @@ spring:
     mapping-resources: META-INF/orm.xml
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
-    properties:
-      javax:
-        persistence:
-          schema-generation:
-            scripts:
-              action: create
-              create-target: create.sql
-              create-source: metadata
+      ddl-auto: update
+#    properties:
+#      javax:
+#        persistence:
+#          schema-generation:
+#            scripts:
+#              action: create
+#              create-target: create.sql
+#              create-source: metadata
   security:
     oauth2:
       resourceserver:
@@ -31,8 +31,8 @@ spring:
 
 bonnafood:
   security:
-    disabled: false
-    default-user-id-if-disabled: 0919df77-ba6d-4214-acc9-70582db6fef5
+    disabled: true
+    default-user-id-if-disabled: f572f96c-5b59-4695-98ce-29ff068b8942
 
 springdoc:
   api-docs:
@@ -47,7 +47,7 @@ springdoc:
   show-actuator: true
 
 opendocument:
-  contact-email: contato@bonnafood.com.br
+  contact-email: contato@bonnasys.com.br
   contact-name: Contato Bonnafood :)
   module: Bonnafood
   api-version: 1.0
